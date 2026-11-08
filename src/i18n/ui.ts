@@ -257,6 +257,15 @@ export const ui = {
     'contact.linkedin.label': 'LINKEDIN',
     'contact.linkedin.desc': 'Professional profile, academic background and connections.',
     'contact.location.label': 'LOCATION',
+    'contact.cv.label': 'CURRICULUM VITAE',
+    'contact.cv.desc': 'Official resume detailing projects, system architecture and technical experience.',
+    'about.cv.label': 'CURRICULUM VITAE',
+    'about.cv.title': 'Curriculum Vitae',
+    'about.cv.desc': 'Technical resume summarizing project experience, technologies and education.',
+    'about.cv.download': 'DOWNLOAD CV (PDF)',
+    'about.cv.view': 'VIEW CV (PDF)',
+    'about.cv.en': 'English CV',
+    'about.cv.es': 'Spanish CV',
 
     // Footer
     'footer.copyright': '© {year} Darlyng Mateo',
@@ -526,6 +535,15 @@ export const ui = {
     'contact.linkedin.label': 'LINKEDIN',
     'contact.linkedin.desc': 'Perfil profesional, formación académica y red de contactos.',
     'contact.location.label': 'UBICACIÓN',
+    'contact.cv.label': 'CURRICULUM VITAE',
+    'contact.cv.desc': 'Currículum oficial detallando proyectos, arquitectura de sistemas y experiencia técnica.',
+    'about.cv.label': 'CURRICULUM VITAE',
+    'about.cv.title': 'Curriculum Vitae',
+    'about.cv.desc': 'Resumen técnico con experiencia en proyectos, tecnologías y formación académica.',
+    'about.cv.download': 'DESCARGAR CV (PDF)',
+    'about.cv.view': 'VER CV (PDF)',
+    'about.cv.en': 'CV en inglés',
+    'about.cv.es': 'CV en español',
 
     // Footer
     'footer.copyright': '© {year} Darlyng Mateo',

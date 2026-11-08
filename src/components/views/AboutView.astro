@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import InterestCard from '../InterestCard.astro';
 import { skillGroups } from '../../data/skills';
+import { site } from '../../data/site';
 import { useTranslations, localizedPath } from '../../i18n/utils';
 import type { Lang } from '../../types';
 
@@ -51,6 +52,39 @@ const t = useTranslations(lang);
             <div style="margin-top: 16px;">
               <a href={localizedPath('/certificates', lang)} class="inline-accent-link">
                 <span>{t('home.certificates.cta')}</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Curriculum Vitae (EN & ES) -->
+        <div class="education-block" style="margin-top: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap;">
+            <div>
+              <span class="skill-group-label">{t('about.cv.label')}</span>
+              <h3 class="education-inst">{t('about.cv.title')}</h3>
+              <p class="education-program" style="margin-bottom: 0;">{t('about.cv.desc')}</p>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <a
+                href={site.cv.en}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn"
+                style="padding: 8px 14px; font-size: 11px;"
+              >
+                <span>{t('about.cv.en')}</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+              <a
+                href={site.cv.es}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn primary"
+                style="padding: 8px 14px; font-size: 11px;"
+              >
+                <span>{t('about.cv.es')}</span>
                 <span aria-hidden="true">↗</span>
               </a>
             </div>

@@ -10,7 +10,7 @@ export const projects: Project[] = [
       en: 'Youth Civic Participation Platform',
       es: 'Plataforma de Participación Ciudadana Juvenil',
     },
-    image: '/images/coro-blueprint.jpg',
+        image: '/images/projects/coro-thumb.png',
     tagline: {
       en: 'A civic participation platform connecting young people with public institutions through traceable community reports and institutional responses.',
       es: 'Una plataforma de participación ciudadana que conecta a los jóvenes con las instituciones públicas mediante reportes comunitarios y respuestas institucionales trazables.',
@@ -167,7 +167,7 @@ export const projects: Project[] = [
       en: 'Academic & Administrative System · IPMHU',
       es: 'Sistema Interno Académico · IPMHU',
     },
-    image: '/images/sia-architecture.jpg',
+    image: '/images/projects/sia-thumb.png',
     tagline: {
       en: 'An academic and administrative management system developed for IPMHU, exploring backend architecture, database management and role-based access control.',
       es: 'Un sistema de gestión académica y administrativa desarrollado para IPMHU, que exploró arquitectura backend, gestión de bases de datos y control de acceso basado en roles.',

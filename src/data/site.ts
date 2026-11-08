@@ -11,4 +11,8 @@ export const site = {
     program: 'Desarrollo y Administraciones de Aplicaciones Informáticas',
     expectedGraduation: 2028,
   },
+  cv: {
+    en: '/cv/cv-en.pdf',
+    es: '/cv/cv-es.pdf',
+  },
 } as const;
