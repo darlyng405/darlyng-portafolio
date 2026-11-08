@@ -1,0 +1,74 @@
+---
+import '@fontsource-variable/space-grotesk';
+import '@fontsource-variable/inter';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import themeInit from 'virtual:theme-init';
+import Analytics from '@vercel/analytics/astro';
+import { getLangFromUrl, alternatePath } from '../i18n/utils';
+import { site } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const altPath = alternatePath(Astro.url.pathname);
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const enHref = new URL(lang === 'en' ? Astro.url.pathname : altPath, Astro.site);
+const esHref = new URL(lang === 'es' ? Astro.url.pathname : altPath, Astro.site);
+---
+
+<!doctype html>
+<html lang={lang} data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <link rel="alternate" hreflang="en" href={enHref} />
+    <link rel="alternate" hreflang="es" href={esHref} />
+    <link rel="alternate" hreflang="x-default" href={enHref} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'es_ES'} />
+    <meta property="og:locale:alternate" content={lang === 'en' ? 'es_ES' : 'en_US'} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script is:inline set:html={themeInit}></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <Nav />
+      <main>
+        <slot />
+      </main>
+      <Footer />
+    </div>
+
+    <script>
+      import { redirectForLangPreference } from '../scripts/lang-redirect';
+      import { initAnimations } from '../scripts/animations'; 
+      import '../scripts/theme-toggle';
+      import '../scripts/lang-switch';
+      import '../scripts/mobile-menu';
+      
+      redirectForLangPreference();
+      initAnimations(); 
+    </script>
+
+    <Analytics />
+  </body>
+</html>

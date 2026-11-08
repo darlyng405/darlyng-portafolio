@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { useTranslations } from '../i18n/utils';
+import { site } from '../data/site';
+
+const lang = 'en';
+const t = useTranslations(lang);
+---
+
+<BaseLayout title={`Contact — Darlyng Mateo`} description={t('contact.body')}>
+  <section class="section container">
+    <span class="eyebrow">{t('contact.label')}</span>
+    <h1 class="section-title" style="margin-top: 16px;">{t('contact.title')}</h1>
+    <p class="subtitle" style="margin-top: 12px;">{t('contact.subtitle')}</p>
+    <p class="lead" style="margin-top: 20px;">{t('contact.body')}</p>
+
+    <div class="contact-cards">
+      <a href={`mailto:${site.email}`} class="contact-card">
+        <span class="label">{t('contact.email.label')}</span>
+        <span class="value">{site.email}</span>
+      </a>
+      <a href={site.github} target="_blank" rel="noopener noreferrer" class="contact-card">
+        <span class="label">{t('contact.github.label')}</span>
+        <span class="value">@darlyng405</span>
+      </a>
+      <a href={site.linkedin} target="_blank" rel="noopener noreferrer" class="contact-card">
+        <span class="label">{t('contact.linkedin.label')}</span>
+        <span class="value">Darlyng Mateo</span>
+      </a>
+    </div>
+  </section>
+</BaseLayout>

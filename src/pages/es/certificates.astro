@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CertificateCard from '../../components/CertificateCard.astro';
+import { certificates } from '../../data/certificates';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'es';
+const t = useTranslations(lang);
+---
+
+<BaseLayout
+  title={`${t('certificates.title')} — Darlyng Mateo`}
+  description={t('certificates.subtitle')}
+>
+  <section class="section container">
+    <span class="eyebrow">{t('certificates.label')}</span>
+    <h1 class="section-title" style="margin-top: 16px;">{t('certificates.title')}</h1>
+    <p class="lead" style="margin-top: 20px;">{t('certificates.subtitle')}</p>
+
+    {certificates.length > 0 ? (
+      <div class="cert-grid">
+        {certificates.map((c) => (
+          <CertificateCard certificate={c} lang={lang} />
+        ))}
+      </div>
+    ) : (
+      <p class="lead" style="margin-top: 40px;">{t('certificates.empty')}</p>
+    )}
+  </section>
+</BaseLayout>

@@ -1,0 +1,21 @@
+# build
+dist/
+.astro/
+.vercel/
+
+# deps
+node_modules/
+.pnpm-store/
+
+# env
+.env
+.env.*
+!.env.example
+
+# tests
+test-results/
+playwright-report/
+
+# system
+.DS_Store
+*.log

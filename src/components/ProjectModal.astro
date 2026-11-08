@@ -1,0 +1,73 @@
+---
+import type { Project } from '../types';
+import type { Lang } from '../types';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  project: Project;
+  lang: Lang;
+}
+
+const { project, lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<div
+  class="modal-overlay"
+  id={`modal-${project.slug}`}
+  data-open="false"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby={`modal-title-${project.slug}`}
+>
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title" id={`modal-title-${project.slug}`}>{project.title}</h3>
+      <button
+        type="button"
+        class="icon-btn"
+        data-modal-close
+        aria-label={t('work.modal.close')}
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>{project.description[lang]}</p>
+      {project.tech.length > 0 && (
+        <div class="project-tech" style="margin-top: 16px;">
+          {project.tech.map((tag) => <span class="tech-tag">{tag}</span>)}
+        </div>
+      )}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-modal-target]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.modalTarget;
+      if (!id) return;
+      const overlay = document.getElementById(id);
+      if (!overlay) return;
+      overlay.setAttribute('data-open', 'true');
+      const closeBtn = overlay.querySelector<HTMLButtonElement>('[data-modal-close]');
+      closeBtn?.focus();
+    });
+  });
+
+  document.querySelectorAll<HTMLElement>('.modal-overlay').forEach((overlay) => {
+    const close = () => overlay.setAttribute('data-open', 'false');
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) close();
+    });
+    overlay.querySelectorAll<HTMLElement>('[data-modal-close]').forEach((b) => {
+      b.addEventListener('click', close);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.getAttribute('data-open') === 'true') close();
+    });
+  });
+</script>

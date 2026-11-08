@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { projects } from '../../../data/projects';
+import { useTranslations, localizedPath } from '../../../i18n/utils';
+import type { Project } from '../../../types';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: Project;
+}
+const { project } = Astro.props;
+const lang = 'es';
+const t = useTranslations(lang);
+const statusKey = `work.status.${project.status}` as const;
+---
+
+<BaseLayout
+  title={`${project.title} — Darlyng Mateo`}
+  description={project.description[lang]}
+>
+  <section class="section container">
+    <a href={localizedPath('/work', lang)} class="mono" style="margin-bottom: 24px; display: inline-block;">
+      ← {t('project.back')}
+    </a>
+    <span class="eyebrow">{t(statusKey)}</span>
+    <h1 class="display" style="margin-top: 16px;">{project.title}</h1>
+    <p class="lead" style="margin-top: 20px;">{project.description[lang]}</p>
+
+    <div style="margin-top: 48px; display: grid; gap: 32px;">
+      <article>
+        <h2 class="project-title">{t('project.sections.overview')}</h2>
+        <p class="lead" style="margin-top: 12px;">{t('project.pending')}</p>
+      </article>
+
+      {project.tech.length > 0 && (
+        <article>
+          <h2 class="project-title">{t('project.sections.tech')}</h2>
+          <div class="project-tech" style="margin-top: 16px;">
+            {project.tech.map((tag) => <span class="tech-tag">{tag}</span>)}
+          </div>
+        </article>
+      )}
+    </div>
+  </section>
+</BaseLayout>

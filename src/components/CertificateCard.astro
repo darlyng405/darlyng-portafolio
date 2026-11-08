@@ -1,0 +1,53 @@
+---
+import type { Certificate, Lang } from '../types';
+import { formatDate } from '../data/certificates';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  certificate: Certificate;
+  lang: Lang;
+}
+const { certificate, lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<article class="cert-card">
+  <div class="cert-visual">
+    <span class="cert-issuer">{certificate.issuerShort}</span>
+  </div>
+  <div class="cert-body">
+    <span class="cert-label">{t('certificates.verified')}</span>
+    <h2 class="cert-title">{certificate.name[lang]}</h2>
+    <dl class="cert-meta">
+      <div>
+        <dt>{t('certificates.issuer')}</dt>
+        <dd>{certificate.issuer[lang]}</dd>
+      </div>
+      <div>
+        <dt>{t('certificates.issued')}</dt>
+        <dd>{formatDate(certificate.issuedDate, lang)}</dd>
+      </div>
+      {certificate.expiresDate && (
+        <div>
+          <dt>{t('certificates.expires')}</dt>
+          <dd>{formatDate(certificate.expiresDate, lang)}</dd>
+        </div>
+      )}
+      {certificate.durationHours && (
+        <div>
+          <dt>{t('certificates.duration')}</dt>
+          <dd>{certificate.durationHours} {t('certificates.hours')}</dd>
+        </div>
+      )}
+    </dl>
+    <a
+      href={certificate.pdfPath}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="btn primary"
+      style="margin-top: 8px;"
+    >
+      {t('certificates.view')} ↗
+    </a>
+  </div>
+</article>

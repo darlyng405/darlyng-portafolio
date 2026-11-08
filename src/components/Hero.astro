@@ -1,0 +1,31 @@
+---
+import { getLangFromUrl, useTranslations, localizedPath } from '../i18n/utils';
+import CodeCard from './CodeCard.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section class="hero container">
+  <div class="hero-text">
+    <span class="eyebrow">{t('hero.kicker')}</span>
+    <h1 class="display" style="margin-top: 20px;">
+      {t('hero.headline1')}<br />
+      <em>{t('hero.headline2')}</em><br />
+      {t('hero.headline3')}
+    </h1>
+    <p class="lead" style="margin-top: 22px;">{t('hero.description')}</p>
+    <div class="hero-ctas">
+      <a href={localizedPath('/work', lang)} class="btn primary">
+        {t('hero.cta.projects')} ↗
+      </a>
+      <a href={localizedPath('/journal', lang)} class="btn">
+        {t('hero.cta.journal')}
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-card">
+    <CodeCard />
+  </div>
+</section>

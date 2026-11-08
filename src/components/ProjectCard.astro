@@ -1,0 +1,61 @@
+---
+import type { Project, Lang } from '../types';
+import { useTranslations, localizedPath } from '../i18n/utils';
+
+interface Props {
+  project: Project;
+  lang: Lang;
+  variant?: 'full' | 'compact';
+}
+
+const { project, lang, variant = 'full' } = Astro.props;
+const t = useTranslations(lang);
+const statusKey = `work.status.${project.status}` as const;
+const detailHref = localizedPath(`/work/${project.slug}`, lang);
+
+// Elegir el mockup CSS según el proyecto
+const mockupClass = 
+  project.slug === 'coro' ? 'mockup-coro' : 
+  project.slug === 'sia' ? 'mockup-sia' : 
+  'mockup-votech';
+---
+
+{variant === 'compact' ? (
+  <a href={detailHref} class="project-compact" data-reveal>
+    <span class="project-status">{t(statusKey)}</span>
+    <h4>{project.title}</h4>
+    <p>{project.tagline[lang]}</p>
+    <span class="arrow">{t('work.cta.full')} ↗</span>
+  </a>
+) : (
+  <article class="project-card" data-reveal>
+    <div class="project-visual">
+      <div class={`mockup-ui ${mockupClass}`}></div>
+    </div>
+    <div class="project-body">
+      <div class="project-header">
+        <h3 class="project-title">{project.title}</h3>
+        <span class="project-status">{t(statusKey)}</span>
+      </div>
+      <p class="project-desc">{project.description[lang]}</p>
+      {project.tech.length > 0 && (
+        <div class="project-tech">
+          {project.tech.map((tag) => <span class="tech-tag">{tag}</span>)}
+        </div>
+      )}
+      <div class="project-ctas">
+        <button
+          type="button"
+          class="btn"
+          data-modal-target={`modal-${project.slug}`}
+          aria-haspopup="dialog"
+        >
+          {t('work.cta.details')}
+        </button>
+        <a href={detailHref} class="btn primary">
+          {t('work.cta.full')} ↗
+        </a>
+      </div>
+    </div>
+  </article>
+)}

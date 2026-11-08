@@ -1,0 +1,7 @@
+/*
+ * TODO: declarar @font-face con fuentes autoalojadas en public/fonts/
+ * - Space Grotesk (encabezados), Inter (texto), IBM Plex Mono (código y metadatos)
+ * - Fuentes variables, subconjuntos con acentos para inglés y español
+ * - font-display: swap y fuente de respaldo ajustada para evitar CLS
+ * - Precargar solo Space Grotesk e Inter
+ */

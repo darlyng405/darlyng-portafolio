@@ -1,0 +1,44 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const cppCode = `#include <iostream>
+
+int main() {
+    std::cout << "Clean code over fast code" << "\\n";
+    return 0;
+}`;
+---
+
+<div class="code-card">
+  <div class="code-card-header">
+    <div style="display:flex; gap:6px;">
+      <span style="width:8px;height:8px;border-radius:50%;background:#E87999;"></span>
+      <span style="width:8px;height:8px;border-radius:50%;background:#D4FF24;"></span>
+      <span style="width:8px;height:8px;border-radius:50%;background:#4D91F5;"></span>
+    </div>
+    <span>main.cpp</span>
+    <span>C++ / 17</span>
+  </div>
+
+  <div class="code-card-body" aria-label="C++ code sample">
+    <pre style="margin:0;"><code class="typewriter-text">{cppCode}</code></pre>
+  </div>
+
+  <div class="code-card-footer">
+    <span><span class="status-dot"></span>{t('hero.code.statusLeft')}</span>
+    <span>{t('hero.code.statusRight')}</span>
+  </div>
+</div>
+
+<style>
+  /* Ajuste local para el bloque de código */
+  .code-card-body code {
+    font-family: var(--font-mono);
+    color: var(--text);
+    display: block;
+    white-space: pre;
+  }
+</style>

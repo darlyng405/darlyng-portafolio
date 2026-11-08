@@ -1,0 +1,47 @@
+/* Tokens de diseño. Tema oscuro por defecto; el claro se activa con data-theme="light". */
+:root {
+  color-scheme: dark;
+
+  /* Tema oscuro */
+  --bg: #030407;
+  --surface: #111827;
+  --surface-2: #171f30;
+  --text: #e5e4e2;
+  --muted: #a5a7b9;
+  --border: #283247;
+  --accent-blue: #1558c9;
+  --accent-2: #d4ff24; /* lima */
+
+  /* Tipografías */
+  --font-heading: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Jerarquía tipográfica de referencia (escritorio). Ajustar por breakpoint. */
+  --fs-hero: 76px;
+  --fs-section: 48px;
+  --fs-project: 28px;
+  --fs-subtitle: 20px;
+  --fs-body: 16px;
+  --fs-secondary: 14px;
+  --fs-nav: 13px;
+  --fs-label: 11px;
+  --fs-meta: 10px;
+
+  --lh-heading: 1.05;
+  --lh-body: 1.7;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  /* Warm Editorial */
+  --bg: #eae2d5;
+  --surface: #f5f0e7;
+  --surface-2: #ded4c5;
+  --text: #292720;
+  --muted: #716b60;
+  --border: #d1c5b5;
+  --accent-blue: #1558c9;
+  --accent-2: #899447; /* oliva: PENDIENTE de validación visual */
+}
