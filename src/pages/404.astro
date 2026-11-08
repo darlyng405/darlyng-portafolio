@@ -1,21 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { useTranslations, localizedPath } from '../i18n/utils';
-
-const lang = 'en';
-const t = useTranslations(lang);
+import NotFoundView from '../components/views/NotFoundView.astro';
 ---
 
-<BaseLayout
-  title="404 — Darlyng Mateo"
-  description={t('notFound.message')}
->
-  <section class="not-found container">
-    <span class="code">404</span>
-    <h1>{t('notFound.message')}</h1>
-    <div class="btn-row" style="justify-content: center;">
-      <a href={localizedPath('/', lang)} class="btn primary">{t('notFound.home')}</a>
-      <a href={localizedPath('/work', lang)} class="btn">{t('notFound.work')}</a>
-    </div>
-  </section>
-</BaseLayout>
+<NotFoundView lang="en" />

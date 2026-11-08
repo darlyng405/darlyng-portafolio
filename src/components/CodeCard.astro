@@ -3,42 +3,73 @@ import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-
-const cppCode = `#include <iostream>
-
-int main() {
-    std::cout << "Clean code over fast code" << "\\n";
-    return 0;
-}`;
 ---
 
-<div class="code-card">
+<div class="code-card" data-code-card>
   <div class="code-card-header">
-    <div style="display:flex; gap:6px;">
-      <span style="width:8px;height:8px;border-radius:50%;background:#E87999;"></span>
-      <span style="width:8px;height:8px;border-radius:50%;background:#D4FF24;"></span>
-      <span style="width:8px;height:8px;border-radius:50%;background:#4D91F5;"></span>
+    <div class="code-window-dots" aria-hidden="true">
+      <span class="dot dot-1"></span>
+      <span class="dot dot-2"></span>
+      <span class="dot dot-3"></span>
     </div>
-    <span>main.cpp</span>
-    <span>C++ / 17</span>
+    <span class="code-filename">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <polyline points="16 18 22 12 16 6"></polyline>
+        <polyline points="8 6 2 12 8 18"></polyline>
+      </svg>
+      {t('hero.code.file')}
+    </span>
+    <div class="code-header-right">
+      <span class="code-lang-tag">{t('hero.code.lang')}</span>
+      <button
+        type="button"
+        class="code-run-btn"
+        data-code-run
+        aria-expanded="false"
+        aria-controls="hero-code-stdout"
+        title={t('hero.code.run')}
+      >
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+        <span>RUN</span>
+      </button>
+    </div>
   </div>
 
-  <div class="code-card-body" aria-label="C++ code sample">
-    <pre style="margin:0;"><code class="typewriter-text">{cppCode}</code></pre>
+  <div class="code-card-body" role="region" aria-label="C++17 code sample">
+    <pre style="margin:0;"><code class="typewriter-code"><span class="code-line"><span class="ln">01</span><span class="tok-pre">#include</span> <span class="tok-str">&lt;bits/stdc++.h&gt;</span></span>
+<span class="code-line"><span class="ln">02</span><span class="tok-kw">using namespace</span> <span class="tok-fn">std</span>;</span>
+<span class="code-line"><span class="ln">03</span></span>
+<span class="code-line"><span class="ln">04</span><span class="tok-kw">int</span> <span class="tok-fn">main</span> () &#123;</span>
+<span class="code-line"><span class="ln">05</span>    cout &lt;&lt; <span class="tok-str">"Clean code over fast code"</span> &lt;&lt; <span class="tok-str">"\n"</span>;</span>
+<span class="code-line"><span class="ln">06</span>    <span class="tok-kw">return</span> <span class="tok-num">0</span>;</span>
+<span class="code-line"><span class="ln">07</span>&#125;</span></code></pre>
+  </div>
+
+  <div id="hero-code-stdout" class="code-stdout" data-open="false" aria-live="polite">
+    <div class="code-stdout-bar">
+      <span>$ g++ -std=c++17 competitive.cpp &amp;&amp; ./a.out</span>
+      <span class="code-exit-ok">exit 0</span>
+    </div>
+    <div class="code-stdout-output">Clean code over fast code</div>
   </div>
 
   <div class="code-card-footer">
-    <span><span class="status-dot"></span>{t('hero.code.statusLeft')}</span>
+    <span><span class="code-indicator" aria-hidden="true"></span>{t('hero.code.statusLeft')}</span>
     <span>{t('hero.code.statusRight')}</span>
   </div>
 </div>
 
-<style>
-  /* Ajuste local para el bloque de código */
-  .code-card-body code {
-    font-family: var(--font-mono);
-    color: var(--text);
-    display: block;
-    white-space: pre;
-  }
-</style>
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-code-run]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('[data-code-card]');
+      const stdout = card?.querySelector<HTMLElement>('.code-stdout');
+      if (!stdout) return;
+      const isOpen = stdout.getAttribute('data-open') === 'true';
+      stdout.setAttribute('data-open', String(!isOpen));
+      btn.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
+</script>

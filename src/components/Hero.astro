@@ -8,24 +8,25 @@ const t = useTranslations(lang);
 
 <section class="hero container">
   <div class="hero-text">
-    <span class="eyebrow">{t('hero.kicker')}</span>
-    <h1 class="display" style="margin-top: 20px;">
+    <span class="eyebrow" data-stagger>{t('hero.kicker')}</span>
+    <h1 class="display" data-stagger style="margin-top: 20px;">
       {t('hero.headline1')}<br />
       <em>{t('hero.headline2')}</em><br />
       {t('hero.headline3')}
     </h1>
-    <p class="lead" style="margin-top: 22px;">{t('hero.description')}</p>
-    <div class="hero-ctas">
+    <p class="lead" data-stagger style="margin-top: 22px;">{t('hero.description')}</p>
+    <div class="hero-ctas" data-stagger>
       <a href={localizedPath('/work', lang)} class="btn primary">
-        {t('hero.cta.projects')} ↗
+        <span>{t('hero.cta.projects')}</span>
+        <span aria-hidden="true">↗</span>
       </a>
       <a href={localizedPath('/journal', lang)} class="btn">
-        {t('hero.cta.journal')}
+        <span>{t('hero.cta.journal')}</span>
       </a>
     </div>
   </div>
 
-  <div class="hero-card">
+  <div class="hero-card" data-reveal>
     <CodeCard />
   </div>
 </section>

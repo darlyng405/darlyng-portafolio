@@ -6,43 +6,150 @@ interface Props {
   project: Project;
   lang: Lang;
   variant?: 'full' | 'compact';
+  index?: number;
 }
 
-const { project, lang, variant = 'full' } = Astro.props;
+const { project, lang, variant = 'full', index = 0 } = Astro.props;
 const t = useTranslations(lang);
 const statusKey = `work.status.${project.status}` as const;
 const detailHref = localizedPath(`/work/${project.slug}`, lang);
-
-// Elegir el mockup CSS según el proyecto
-const mockupClass = 
-  project.slug === 'coro' ? 'mockup-coro' : 
-  project.slug === 'sia' ? 'mockup-sia' : 
-  'mockup-votech';
+const numLabel = `0${index + 1}`;
 ---
 
 {variant === 'compact' ? (
-  <a href={detailHref} class="project-compact" data-reveal>
-    <span class="project-status">{t(statusKey)}</span>
-    <h4>{project.title}</h4>
-    <p>{project.tagline[lang]}</p>
-    <span class="arrow">{t('work.cta.full')} ↗</span>
-  </a>
-) : (
-  <article class="project-card" data-reveal>
-    <div class="project-visual">
-      <div class={`mockup-ui ${mockupClass}`}></div>
-    </div>
-    <div class="project-body">
-      <div class="project-header">
-        <h3 class="project-title">{project.title}</h3>
+  <article class="project-compact" data-reveal>
+    <a href={detailHref} class="project-compact-visual" aria-label={project.title}>
+      <img
+        src={project.image}
+        alt={`${project.title} — ${project.category[lang]}`}
+        loading="lazy"
+        width="640"
+        height="360"
+        referrerpolicy="no-referrer"
+        class="project-thumb-img"
+      />
+      <div class="project-thumb-scrim"></div>
+      <div class="project-thumb-overlay">
+        <span class="project-num">{numLabel}</span>
+        {project.slug === 'coro' && (
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <path d="M12 21s-7-5.4-7-11a7 7 0 1 1 14 0c0 5.6-7 11-7 11z" />
+            <circle cx="12" cy="10" r="2.5" />
+          </svg>
+        )}
+        {project.slug === 'sia' && (
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <ellipse cx="12" cy="5" rx="8" ry="3" />
+            <path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5" />
+            <path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6" />
+          </svg>
+        )}
+        {project.slug === 'votech' && (
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+          </svg>
+        )}
+      </div>
+    </a>
+    <div class="project-compact-body">
+      <div class="project-meta-line">
         <span class="project-status">{t(statusKey)}</span>
       </div>
-      <p class="project-desc">{project.description[lang]}</p>
+      <h4>
+        <a href={detailHref}>{project.title}</a>
+      </h4>
+      <p>{project.tagline[lang]}</p>
       {project.tech.length > 0 && (
-        <div class="project-tech">
-          {project.tech.map((tag) => <span class="tech-tag">{tag}</span>)}
+        <div class="project-inline-tech">
+          {project.tech.slice(0, 4).join(' · ')}
         </div>
       )}
+      <a href={detailHref} class="arrow">
+        <span>{t('work.cta.full')}</span>
+        <span class="arrow-glyph" aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </article>
+) : (
+  <article class="project-card" data-reveal>
+    <a href={detailHref} class="project-visual" aria-label={project.title}>
+      <img
+        src={project.image}
+        alt={`${project.title} — ${project.category[lang]}`}
+        loading="lazy"
+        width="640"
+        height="360"
+        referrerpolicy="no-referrer"
+        class="project-visual-img"
+      />
+      <div class="project-visual-scrim"></div>
+      <div class="project-schematic" aria-hidden="true">
+        <div class="schematic-top">
+          <span class="schematic-id">{numLabel} / {project.slug.toUpperCase()}</span>
+          <span class="schematic-badge">{project.status.toUpperCase()}</span>
+        </div>
+        {project.slug === 'coro' && (
+          <div class="schematic-diagram">
+            <div class="coro-steps-mini">
+              <span>01 Report</span>
+              <span>→</span>
+              <span>02 Triage</span>
+              <span>→</span>
+              <span>03 Field</span>
+              <span>→</span>
+              <span>04 Verify</span>
+              <span>→</span>
+              <span class="highlight">05 Public</span>
+            </div>
+          </div>
+        )}
+        {project.slug === 'sia' && (
+          <div class="schematic-diagram">
+            <div class="sia-roles-mini">
+              <span>RBAC</span>
+              <span>·</span>
+              <span>5 Roles</span>
+              <span>·</span>
+              <span>PostgreSQL / MSSQL</span>
+            </div>
+          </div>
+        )}
+        {project.slug === 'votech' && (
+          <div class="schematic-diagram">
+            <div class="votech-metric-mini">
+              <span class="highlight">~500 Concurrent Users</span>
+              <span>·</span>
+              <span>School Fair Event</span>
+            </div>
+          </div>
+        )}
+      </div>
+    </a>
+
+    <div class="project-body">
+      <div class="project-header">
+        <div>
+          <span class="project-category-kicker">{project.category[lang]}</span>
+          <h3 class="project-title">
+            <a href={detailHref}>{project.title}</a>
+          </h3>
+        </div>
+        <span class="project-status">{t(statusKey)}</span>
+      </div>
+
+      <p class="project-desc">{project.description[lang]}</p>
+
+      {project.tech.length > 0 && (
+        <div class="project-tech-inline" aria-label={t('work.modal.tech')}>
+          {project.tech.map((tag, i) => (
+            <>
+              {i > 0 && <span class="sep" aria-hidden="true">·</span>}
+              <span class="tech-item">{tag}</span>
+            </>
+          ))}
+        </div>
+      )}
+
       <div class="project-ctas">
         <button
           type="button"
@@ -50,10 +157,11 @@ const mockupClass =
           data-modal-target={`modal-${project.slug}`}
           aria-haspopup="dialog"
         >
-          {t('work.cta.details')}
+          <span>{t('work.cta.details')}</span>
         </button>
         <a href={detailHref} class="btn primary">
-          {t('work.cta.full')} ↗
+          <span>{t('work.cta.full')}</span>
+          <span aria-hidden="true">↗</span>
         </a>
       </div>
     </div>

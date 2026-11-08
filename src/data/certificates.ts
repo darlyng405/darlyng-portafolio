@@ -15,6 +15,8 @@ export const certificates: Certificate[] = [
     issuedDate: '2026-10-28',
     expiresDate: '2029-10-27',
     pdfPath: '/certificates/certiplus-fullstack-expert.pdf',
+    // Set thumbnail to '/images/certificates/certiplus-thumb.png' when image file is added
+    credentialId: 'CP-FSD-EXP-2026',
   },
   {
     id: 'talento-digital-fullstack-intermediate',
@@ -30,6 +32,8 @@ export const certificates: Certificate[] = [
     issuedDate: '2026-10-20',
     durationHours: 80,
     pdfPath: '/certificates/certificado-curso-talento-digital.pdf',
+    // Set thumbnail to '/images/certificates/talento-digital-thumb.png' when image file is added
+    credentialId: 'INDOTEL-BID-2026-80H',
   },
 ];
 

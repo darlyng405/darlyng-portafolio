@@ -37,6 +37,14 @@ function themeInitPlugin() {
 export default defineConfig({
   site: 'https://darlyng.dev',
   output: 'static',
+  devToolbar: {
+    enabled: false,
+  },
+  server: {
+    host: '0.0.0.0',
+    port: 3000,
+    allowedHosts: true,
+  },
   integrations: [
     sitemap({
       filter: (page) => !page.includes('/404'),
@@ -49,5 +57,11 @@ export default defineConfig({
   },
   vite: {
     plugins: [themeInitPlugin()],
+    server: {
+      allowedHosts: true,
+    },
+    preview: {
+      allowedHosts: true,
+    },
   },
 });

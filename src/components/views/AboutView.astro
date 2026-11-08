@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import InterestCard from '../InterestCard.astro';
+import { skillGroups } from '../../data/skills';
+import { useTranslations, localizedPath } from '../../i18n/utils';
+import type { Lang } from '../../types';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<BaseLayout
+  title={t('meta.about.title')}
+  description={t('meta.about.description')}
+>
+  <!-- 01 / BIOGRAPHY & EDITORIAL STUDY -->
+  <section class="section container">
+    <div data-reveal>
+      <span class="eyebrow">{t('about.label')}</span>
+      <h1 class="section-title" style="margin-top: 16px;">{t('about.title')}</h1>
+      <p class="subtitle" style="margin-top: 12px;">{t('about.subtitle')}</p>
+    </div>
+
+    <div class="about-grid" style="margin-top: 48px;">
+      <div class="about-prose" data-reveal>
+        <h2 class="project-title">{t('about.who.title')}</h2>
+        <p class="lead" style="margin-top: 16px; color: var(--text);">{t('about.who.p1')}</p>
+        <p class="lead" style="margin-top: 16px;">{t('about.who.p2')}</p>
+        <p class="lead" style="margin-top: 16px;">{t('about.who.p3')}</p>
+        <p class="lead" style="margin-top: 16px;">{t('about.who.p4')}</p>
+
+        <!-- Academic Formation & Languages -->
+        <div class="about-credentials-row">
+          <div class="education-block">
+            <span class="skill-group-label">{t('about.education.label')}</span>
+            <h3 class="education-inst">{t('about.education.institution')}</h3>
+            <p class="education-program">{t('about.education.program')}</p>
+            <p class="education-meta">{t('about.education.graduation')}</p>
+          </div>
+
+          <div class="education-block">
+            <span class="skill-group-label">{t('about.languages.label')}</span>
+            <ul class="languages-list">
+              <li>{t('about.languages.es')}</li>
+              <li>{t('about.languages.en')}</li>
+            </ul>
+            <div style="margin-top: 16px;">
+              <a href={localizedPath('/certificates', lang)} class="inline-accent-link">
+                <span>{t('home.certificates.cta')}</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="about-visual-col" data-reveal>
+        <div class="about-study-card">
+          <img
+            src="/images/systems-workbench.jpg"
+            alt="Editorial study of computer science fundamentals"
+            width="600"
+            height="450"
+            referrerpolicy="no-referrer"
+            class="about-study-img"
+          />
+          <div class="about-monogram-badge">
+            <span class="monogram-letters">D.M.</span>
+            <span class="monogram-meta">Software Developer · Santo Domingo, DR</span>
+          </div>
+          <p class="about-study-caption">{t('about.photo.caption')}</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 02 / TECHNICAL INTERESTS -->
+  <section class="section container" data-reveal>
+    <span class="eyebrow">{t('about.interests.label')}</span>
+    <h2 class="section-title" style="margin-top: 14px;">{t('about.interests.title')}</h2>
+    <p class="lead" style="margin-top: 12px;">{t('about.interests.body')}</p>
+    <InterestCard lang={lang} />
+  </section>
+
+  <!-- 03 / SKILLS & TECHNOLOGIES (Spec Section 14) -->
+  <section class="section container" data-reveal>
+    <span class="eyebrow">{t('skills.label')}</span>
+    <h2 class="section-title" style="margin-top: 14px;">{t('skills.title')}</h2>
+    <p class="lead" style="margin-top: 12px;">{t('skills.subtitle')}</p>
+
+    <div class="skills-grid">
+      {skillGroups.map((group) => (
+        <div class="skill-category-card" data-reveal>
+          <span class="skill-group-label">{t(group.key)}</span>
+          <div class="skill-tags">
+            {group.tags.map((tag) => (
+              <span class="skill-tag">{tag}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- 04 / WHERE I'M HEADING -->
+  <section class="section container" data-reveal>
+    <div class="heading-editorial-box">
+      <span class="eyebrow">{t('about.heading.label')}</span>
+      <h2 class="section-title" style="margin-top: 14px;">{t('about.heading.title')}</h2>
+      <p class="lead" style="margin-top: 18px; color: var(--text);">{t('about.heading.p1')}</p>
+      <p class="lead" style="margin-top: 14px;">{t('about.heading.p2')}</p>
+    </div>
+  </section>
+
+  <!-- 05 / BEYOND CODE CTA (Spec Section 13) -->
+  <section class="section container" data-reveal>
+    <div class="contact-banner">
+      <div>
+        <span class="eyebrow">{t('beyond.label')}</span>
+        <h2 class="project-title" style="margin-top: 10px;">{t('about.beyond.prompt')}</h2>
+        <p class="lead" style="margin-top: 8px;">{t('beyond.subtitle')}</p>
+      </div>
+      <div class="contact-banner-actions">
+        <a href={localizedPath('/beyond-code', lang)} class="btn primary">
+          <span>{t('about.beyond.cta')}</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

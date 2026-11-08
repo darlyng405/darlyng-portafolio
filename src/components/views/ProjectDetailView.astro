@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { projects } from '../../data/projects';
+import { useTranslations, localizedPath } from '../../i18n/utils';
+import type { Project, Lang } from '../../types';
+
+interface Props {
+  project: Project;
+  lang: Lang;
+}
+
+const { project, lang } = Astro.props;
+const t = useTranslations(lang);
+const statusKey = `work.status.${project.status}` as const;
+
+const currentIndex = projects.findIndex((p) => p.slug === project.slug);
+const prevProject = projects[(currentIndex - 1 + projects.length) % projects.length];
+const nextProject = projects[(currentIndex + 1) % projects.length];
+---
+
+<BaseLayout
+  title={`${project.title} — Darlyng Mateo`}
+  description={project.description[lang]}
+>
+  <section class="section container">
+    <div class="project-detail-top" data-reveal>
+      <a href={localizedPath('/work', lang)} class="back-link">
+        <span aria-hidden="true">←</span>
+        <span>{t('project.back')}</span>
+      </a>
+
+      <div class="project-detail-meta">
+        <span class="eyebrow">{t(statusKey)}</span>
+        <span class="sep" aria-hidden="true">·</span>
+        <span class="mono">{project.category[lang]}</span>
+      </div>
+
+      <h1 class="display" style="margin-top: 16px;">{project.title}</h1>
+      <p class="lead" style="margin-top: 20px; font-size: clamp(16px, 1.4vw, 19px); color: var(--text);">
+        {project.description[lang]}
+      </p>
+
+      {project.tech.length > 0 && (
+        <div class="project-tech-inline" style="margin-top: 24px;">
+          {project.tech.map((tag, i) => (
+            <>
+              {i > 0 && <span class="sep" aria-hidden="true">·</span>}
+              <span class="tech-item">{tag}</span>
+            </>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <!-- High-resolution architectural blueprint showcase -->
+    <div class="project-hero-banner" data-reveal>
+      <img
+        src={project.image}
+        alt={`${project.title} — ${project.category[lang]}`}
+        width="1280"
+        height="720"
+        referrerpolicy="no-referrer"
+        class="project-banner-img"
+      />
+      <div class="project-banner-scrim"></div>
+      <div class="project-banner-caption">
+        <span>0{currentIndex + 1} / {project.title}</span>
+        <span>{project.category[lang]}</span>
+      </div>
+    </div>
+
+    <!-- All verified specification sections -->
+    <div class="project-sections">
+      {project.sections.map((section) => (
+        <article class="project-section" data-reveal>
+          <h2 class="project-title">{section.title[lang]}</h2>
+
+          {section.body && (
+            <p class="lead" style="margin-top: 14px;">
+              {section.body[lang]}
+            </p>
+          )}
+
+          {section.items && section.items.length > 0 && (
+            <ul class:list={['project-section-list', { ordered: section.ordered }]}>
+              {section.items.map((item) => (
+                <li>
+                  <h3 class="project-section-item-title">{item.title[lang]}</h3>
+                  <p class="project-section-item-body">{item.body[lang]}</p>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {section.note && (
+            <p class="project-section-note">
+              {section.note[lang]}
+            </p>
+          )}
+        </article>
+      ))}
+    </div>
+
+    <!-- Next / Previous Project Navigation -->
+    <nav class="project-pager" aria-label="Project navigation" data-reveal>
+      {prevProject && (
+        <a href={localizedPath(`/work/${prevProject.slug}`, lang)} class="pager-card">
+          <span class="mono">← {t('project.prev')}</span>
+          <strong>{prevProject.title}</strong>
+          <span class="pager-sub">{prevProject.category[lang]}</span>
+        </a>
+      )}
+      {nextProject && (
+        <a href={localizedPath(`/work/${nextProject.slug}`, lang)} class="pager-card pager-right">
+          <span class="mono">{t('project.next')} →</span>
+          <strong>{nextProject.title}</strong>
+          <span class="pager-sub">{nextProject.category[lang]}</span>
+        </a>
+      )}
+    </nav>
+  </section>
+</BaseLayout>

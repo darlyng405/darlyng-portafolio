@@ -1,19 +1,31 @@
 export function initAnimations() {
-  // 1. Activar el modo JS (permite que el CSS oculte elementos para animarlos)
   document.documentElement.classList.add('js-enabled');
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion) return;
+  if (prefersReducedMotion) {
+    document.querySelectorAll('[data-stagger], [data-reveal], .code-line').forEach((el) => {
+      el.classList.add('is-visible');
+    });
+    return;
+  }
 
-  // 2. Hero Stagger Entrance
-  const heroElements = document.querySelectorAll('.hero-text > *');
+  // 1. Hero Stagger Entrance
+  const heroElements = document.querySelectorAll('[data-stagger]');
   heroElements.forEach((el, index) => {
     setTimeout(() => {
       el.classList.add('is-visible');
-    }, index * 150 + 100);
+    }, index * 110 + 60);
   });
 
-  // 3. Scroll Reveal
+  // 2. Code Card Line-by-Line Reveal
+  const codeLines = document.querySelectorAll('.code-line');
+  codeLines.forEach((line, index) => {
+    setTimeout(() => {
+      line.classList.add('is-visible');
+    }, index * 85 + 220);
+  });
+
+  // 3. Scroll Reveal via IntersectionObserver
   const reveals = document.querySelectorAll('[data-reveal]');
   if (reveals.length > 0) {
     const observer = new IntersectionObserver(
@@ -25,7 +37,7 @@ export function initAnimations() {
           }
         });
       },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      { threshold: 0.08, rootMargin: '0px 0px -32px 0px' }
     );
     reveals.forEach((el) => observer.observe(el));
   }

@@ -1,0 +1,2285 @@
+# ESPECIFICACIÓN MAESTRA DEL PORTAFOLIO PERSONAL — DARLYNG MATEO
+
+**Documento de referencia principal para diseño, contenido, desarrollo, implementación y validación.**
+
+Este documento reúne las decisiones que hemos tomado para construir mi portafolio personal. Debe utilizarse como fuente de verdad durante el desarrollo y las revisiones posteriores.
+
+No se debe simplificar, recortar ni descartar información de este documento por iniciativa propia. Si hay que modificar alguna decisión, debe hacerse porque yo lo he solicitado o porque existe una incompatibilidad técnica real que debe explicarse antes de cambiarla.
+
+---
+
+# 0. PRINCIPIOS GENERALES DEL PROYECTO
+
+Quiero construir un portafolio personal que represente mi perfil como desarrollador de software, mis proyectos, mis intereses técnicos, mi formación y mi evolución.
+
+No quiero que parezca la página de una empresa, una plantilla genérica de desarrollador ni un portafolio de alguien que intenta aparentar más experiencia de la que tiene.
+
+Quiero una identidad propia: un sitio sobrio, elegante, moderno, técnico, editorial y personal.
+
+El resultado debe comunicar tres cosas:
+
+1. Soy un desarrollador de software que está construyendo sus fundamentos y adquiriendo experiencia.
+2. Tengo un interés genuino por comprender cómo funcionan los sistemas, los algoritmos y el software más allá de su interfaz.
+3. Me interesa aprender, construir proyectos significativos y enfrentar problemas técnicamente interesantes.
+
+## Principios que deben mantenerse durante todo el desarrollo
+
+- Profesional, pero no corporativo.
+- Minimalista, pero no vacío.
+- Elegante, pero no pretencioso.
+- Técnico, pero sin convertir cada sección en una demostración innecesaria de conocimientos.
+- Personal, pero sin publicar información privada.
+- Visualmente atractivo, pero sin sacrificar legibilidad ni funcionalidad.
+- Claro y ordenado, sin exceso de animaciones, colores o elementos decorativos.
+- Honesto con mi nivel de experiencia.
+- Preparado para crecer sin tener que reconstruirlo completamente cada vez que agregue un proyecto, artículo o certificado.
+
+**No quiero que se eliminen componentes, secciones, textos o versiones responsive para conseguir una implementación aparentemente más sencilla.** La prioridad es conservar la integridad del diseño y de las decisiones acordadas.
+
+---
+
+# 1. INFORMACIÓN PERSONAL
+
+## Identidad pública
+
+**Nombre:** Darlyng Mateo.
+
+**Título profesional:** Software Developer.
+
+No utilizar Software Engineer como título profesional.
+
+**Ubicación pública:** Santo Domingo, Dominican Republic.
+
+**Correo electrónico:** mateodarlyng5@gmail.com
+
+**GitHub:**
+https://github.com/darlyng405
+
+**LinkedIn:**
+https://www.linkedin.com/in/darlyng-mateo-peral-7031793a6
+
+**Portafolio anterior:**
+https://darlyng405.github.io/Portfolio/
+
+**Portafolio Vercel anterior:**
+https://portfolio-re9fkj5vr-darlyng405s-projects.vercel.app/
+
+Los enlaces anteriores sirven como referencias históricas; no deben confundirse con el nuevo diseño ni utilizarse como sustitutos de los nuevos enlaces del sitio.
+
+## Formación académica
+
+**Institución:** Instituto Politécnico Max Henríquez Ureña (IPMHU).
+
+**Programa oficial:** Desarrollo y Administraciones de Aplicaciones Informáticas.
+
+**Graduación esperada:** 2028.
+
+Traducción sugerida para el sitio en inglés:
+
+Application Development and Administration.
+
+## Idiomas
+
+- Español: nativo.
+- Inglés: B1.
+
+## Información que no debe publicarse
+
+No mostrar mi edad, fecha de nacimiento, información médica ni datos privados que no sean necesarios para una presentación profesional.
+
+No inventar números telefónicos, direcciones físicas, experiencia laboral ni información adicional.
+
+---
+
+# 2. ARQUITECTURA GENERAL Y PÁGINAS
+
+El sitio utilizará una arquitectura multipágina con Astro.
+
+## Páginas principales
+
+| Ruta | Contenido |
+|---|---|
+| `/` | Home |
+| `/work` | Proyectos |
+| `/journal` | Blog técnico |
+| `/about` | Información personal y perfil técnico |
+| `/contact` | Información de contacto |
+| `/beyond-code` | Intereses personales más allá de la programación |
+| `/certificates` | Certificaciones y credenciales |
+| `/work/coro` | Página individual de CORO |
+| `/work/sia` | Página individual de SIA |
+| `/work/votech` | Página individual de Votech |
+
+La ruta `/certificates` es la propuesta para el nuevo apartado de certificados. Debe mantenerse como una sección diferenciada; si se decide utilizar otra ubicación, debe conservarse igualmente su identidad y funcionalidad independiente.
+
+## Navegación principal
+
+El orden exacto del menú principal será:
+
+1. HOME
+2. WORK
+3. JOURNAL
+4. ABOUT
+5. CONTACT
+
+BEYOND CODE no estará en el menú principal.
+
+Se podrá acceder a Beyond Code desde:
+
+- Home.
+- La parte inferior de About.
+
+Certificates tendrá un acceso propio desde el sitio, sin necesidad de alterar el orden aprobado del menú principal.
+
+## Comportamiento de la navegación
+
+- Mostrar claramente la página activa.
+- El indicador de página activa será una línea inferior delgada.
+- El indicador debe tener una transición sutil.
+- Los enlaces deben tener estados de hover, focus y active.
+- La navegación debe ser coherente entre páginas.
+- No crear menús innecesariamente complejos.
+- El menú móvil debe ser accesible y funcional mediante teclado y lectores de pantalla.
+
+## Encabezado de escritorio
+
+El encabezado debe organizarse en tres zonas:
+
+**Izquierda:** mi nombre o identificador de marca.
+
+**Centro:** navegación principal.
+
+**Derecha:** controles de idioma y tema.
+
+El nombre debe estar visualmente separado de los enlaces de navegación. Los controles no deben mezclarse con los enlaces principales.
+
+## Encabezado móvil
+
+En pantallas pequeñas:
+
+- El encabezado debe conservar mi identidad.
+- La navegación principal se transforma en un menú móvil accesible.
+- Los controles de idioma y tema deben continuar disponibles.
+- No debe producirse desbordamiento horizontal.
+- No se deben ocultar páginas importantes para simplificar el menú.
+
+---
+
+# 3. SISTEMA DE IDIOMAS
+
+El idioma predeterminado será inglés.
+
+El usuario podrá cambiar a español mediante un selector.
+
+## Selector
+
+El selector mostrará el idioma alternativo, no el idioma actualmente activo.
+
+Ejemplo:
+
+- Cuando el sitio está en inglés, el selector muestra `ES`.
+- Cuando está en español, muestra `EN`.
+
+No mostrar simultáneamente dos opciones grandes ni convertir el selector en un elemento visual dominante.
+
+## Traducción
+
+La traducción debe abarcar absolutamente toda la interfaz:
+
+- Navegación.
+- Botones.
+- Títulos.
+- Descripciones.
+- Proyectos.
+- Estados.
+- Metadatos.
+- Certificados.
+- Artículos.
+- Estados vacíos.
+- Mensajes de error.
+- Menús móviles.
+- Formularios, si en el futuro se añade alguno.
+- Metadatos SEO de cada idioma.
+
+No debe suceder que algunas secciones permanezcan en inglés al cambiar a español.
+
+## Persistencia
+
+El idioma elegido debe persistir al navegar entre páginas y al recargar el sitio.
+
+Se utilizará localStorage para recordar la preferencia.
+
+## URLs bilingües
+
+La estrategia definitiva de URLs para ambos idiomas aún debe decidirse.
+
+Debe resolverse antes de cerrar SEO y sitemap. Se debe garantizar que los buscadores puedan descubrir las dos versiones, que los enlaces sean consistentes y que el idioma persistente no perjudique la indexación.
+
+No asumir una estrategia de URLs sin revisarla.
+
+---
+
+# 4. SISTEMA DE TEMAS
+
+El sitio iniciará en modo oscuro.
+
+El usuario podrá cambiar entre modo oscuro y claro.
+
+La preferencia debe mantenerse al navegar y recargar el sitio.
+
+Se utilizará localStorage para recordar la elección.
+
+El cambio entre temas debe sentirse natural, sin parpadeos ni cambios bruscos de colores.
+
+## 4.1. Modo oscuro
+
+El modo oscuro será el aspecto predeterminado y el principal referente visual.
+
+Paleta acordada:
+
+| Elemento | Color |
+|---|---|
+| Fondo principal | `#030407` |
+| Superficie principal | `#111827` |
+| Superficie secundaria | `#171F30` |
+| Texto principal | `#E5E4E2` |
+| Texto secundario | `#A5A7B9` |
+| Bordes | `#283247` |
+| Azul de acento | `#1558C9` |
+| Lima de acento | `#D4FF24` |
+
+El resultado debe conservar profundidad, contraste y legibilidad sin depender de fondos degradados o efectos luminosos exagerados.
+
+## 4.2. Modo claro
+
+El modo claro utilizará una dirección visual **Warm Editorial**.
+
+No quiero un modo claro blanco genérico ni una inversión automática de los colores del modo oscuro.
+
+Paleta acordada:
+
+| Elemento | Color |
+|---|---|
+| Fondo principal | `#EAE2D5` |
+| Superficie principal | `#F5F0E7` |
+| Superficie secundaria | `#DED4C5` |
+| Texto principal | `#292720` |
+| Texto secundario | `#716B60` |
+| Bordes | `#D1C5B5` |
+| Azul de acento | `#1558C9` |
+| Lima de acento | Pendiente de validación visual |
+
+### Problema detectado durante los mockups
+
+El amarillo/lima eléctrico del modo claro resultaba demasiado intenso.
+
+Se propuso probar un tono oliva más moderado:
+
+`#899447`
+
+Pero esta modificación todavía debe validarse visualmente.
+
+**Importante:** el azul acordado es `#1558C9`. El tratamiento del acento lima en modo claro requiere una última validación para conservar la identidad de marca sin producir un contraste visual desagradable.
+
+No cambiar el sistema cromático completo por resolver este detalle.
+
+## 4.3. Coherencia entre temas
+
+Los dos modos deben sentirse como dos versiones del mismo producto.
+
+Deben conservar:
+
+- La misma jerarquía visual.
+- Los mismos componentes.
+- La misma disposición.
+- Los mismos tamaños relativos.
+- Los mismos elementos.
+- Los mismos estados de interacción.
+
+El modo claro no debe perder tarjetas, elementos gráficos, detalles o componentes que existan en modo oscuro.
+
+---
+
+# 5. TIPOGRAFÍA Y JERARQUÍA VISUAL
+
+La familia tipográfica acordada es:
+
+| Uso | Tipografía |
+|---|---|
+| Encabezados | Space Grotesk |
+| Texto general | Inter |
+| Código y metadatos técnicos | IBM Plex Mono |
+
+No sustituir estas fuentes por tipografías genéricas sin una razón técnica o visual importante.
+
+## Tamaños de referencia en escritorio
+
+| Elemento | Tamaño aproximado |
+|---|---:|
+| Hero principal | 76 px |
+| Encabezados de sección | 48 px |
+| Títulos de proyectos | 28 px |
+| Subtítulos | 20 px |
+| Texto general | 16 px |
+| Texto secundario | 14 px |
+| Navegación | 13 px |
+| Etiquetas | 11 px |
+| Metadatos | 10 px |
+
+Estos valores son referencias de diseño, no medidas rígidas para todos los componentes.
+
+## Ritmo tipográfico
+
+- Encabezados: line-height aproximado de 1.0 a 1.1.
+- Texto general: line-height aproximado de 1.65 a 1.8.
+- Evitar párrafos demasiado anchos.
+- Utilizar jerarquías reconocibles.
+- No utilizar tamaños enormes para compensar la falta de contenido.
+- Los títulos de tarjetas deben mantener una escala coherente.
+
+---
+
+# 6. DIRECCIÓN VISUAL GENERAL
+
+La dirección elegida es:
+
+**Editorial-tech, clean, elegant, modern, sober, minimal and personal.**
+
+El diseño debe transmitir una mezcla de publicación editorial y portafolio tecnológico.
+
+## Lo que sí quiero
+
+- Composición limpia.
+- Espacios bien distribuidos.
+- Jerarquía visual clara.
+- Tipografía bien trabajada.
+- Tarjetas consistentes.
+- Bordes discretos.
+- Acentos de color usados con intención.
+- Transiciones suaves.
+- Composición editorial.
+- Elementos técnicos pequeños que aporten personalidad.
+- Diseño responsive real, no una adaptación improvisada.
+
+## Lo que no quiero
+
+- Estética cyberpunk.
+- Neón excesivo.
+- Animaciones gratuitas.
+- Partículas decorativas.
+- Glitch effects.
+- Cursores personalizados.
+- Parallax agresivo.
+- Degradados en todas partes.
+- Sombras excesivas.
+- Tarjetas gigantes sin justificación.
+- Efectos que dificulten leer.
+- Aspecto de plantilla genérica de empresa.
+- Elementos que existan solo para llenar espacio.
+
+No utilizar efectos visuales que compitan con el contenido.
+
+---
+
+# 7. MOCKUPS RESPONSIVE OBLIGATORIOS
+
+Antes de considerar cerrado el diseño visual, deben existir seis mockups completos.
+
+No quiero que se entregue solamente una versión de escritorio o solamente un modo de color.
+
+Los seis mockups obligatorios son:
+
+| Dispositivo | Tema | Resolución |
+|---|---|---|
+| Desktop | Dark | 1440 × 900 |
+| Desktop | Light | 1440 × 900 |
+| Tablet | Dark | 820 × 1080 |
+| Tablet | Light | 820 × 1080 |
+| Mobile | Dark | 390 × 844 |
+| Mobile | Light | 390 × 844 |
+
+## Requisitos
+
+- Los seis deben representar el mismo sistema visual.
+- No debe desaparecer una combinación de dispositivo y tema.
+- La versión de escritorio debe aparecer completa, sin recortar arbitrariamente el diseño de la computadora.
+- La versión tablet oscura debe estar presente.
+- La versión móvil clara debe estar presente.
+- No ocultar proyectos importantes para que el mockup resulte más sencillo.
+- No cambiar la estructura entre temas.
+- No eliminar componentes de versiones anteriores que sigan formando parte de las decisiones aprobadas.
+- No sustituir el mockup más completo por uno más simple que haya perdido secciones.
+- Los componentes deben adaptarse, no desaparecer sin justificación.
+
+Los mockups deben servir para evaluar tanto el diseño como la integridad de la información.
+
+---
+
+# 8. HOME
+
+La página inicial debe ser una presentación concisa de mi perfil.
+
+No quiero colocar absolutamente toda mi biografía, todos los detalles de los proyectos y toda mi información técnica en Home.
+
+Cada contenido debe tener una página donde desarrollarse.
+
+## Estructura de Home
+
+La página debe incluir:
+
+1. Hero principal.
+2. Presentación/resumen de proyectos.
+3. Presentación breve de About.
+4. Intereses técnicos.
+5. Acceso al Journal.
+6. Invitación a Beyond Code.
+7. Llamada a Contact.
+8. Footer.
+
+Los tres proyectos deben tener presencia en Home: CORO, SIA y Votech.
+
+La presentación de cada proyecto será breve; los detalles completos estarán en Work.
+
+## 8.1. Hero
+
+### Etiqueta
+
+`Software Developer · Santo Domingo, Dominican Republic`
+
+### Encabezado
+
+`Building systems. Understanding how they work.`
+
+Este encabezado fue aprobado como punto de partida. Se consideró correcto, aunque algo sencillo; no cambiarlo por iniciativa propia.
+
+### Descripción
+
+`I'm Darlyng — a developer interested in algorithms, backend engineering and the systems beneath the software we use every day.`
+
+### Botones
+
+Principal:
+
+`EXPLORE PROJECTS ↗`
+
+Secundario:
+
+`READ THE JOURNAL`
+
+### Composición
+
+En escritorio:
+
+- Texto en una columna.
+- Tarjeta visual de código en otra columna.
+- El texto debe conservar protagonismo.
+- La tarjeta de código aporta personalidad técnica, pero no debe dominar el Hero.
+
+En móvil:
+
+- Texto primero.
+- Tarjeta de código después.
+- No reducir el Hero a una línea diminuta.
+- No perder los botones.
+- Mantener separación y legibilidad.
+
+## 8.2. Tarjeta de código del Hero
+
+La tarjeta debe simular un pequeño editor de código.
+
+Archivo:
+
+`competitive.cpp`
+
+Etiqueta:
+
+`C++17`
+
+Código exacto:
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main () {
+    cout << "Clean code over fast code" << "\n";
+    return 0;
+}
+```
+
+El contenido es ilustrativo y visual. No debe presentarse como un proyecto independiente ni como una prueba de que el código representa una solución compleja.
+
+La tarjeta puede incorporar un efecto de escritura inicial, corto y discreto.
+
+## 8.3. Resumen de proyectos
+
+Mostrar los tres proyectos:
+
+- CORO.
+- SIA.
+- Votech.
+
+La composición debe ser uniforme y permitir llegar a la página Work o a los detalles de cada proyecto.
+
+No inventar métricas ni nuevas descripciones.
+
+## 8.4. About resumido
+
+Home debe incluir una introducción corta que explique quién soy y qué me interesa.
+
+No copiar toda la página About.
+
+Incluir un enlace para ampliar la información.
+
+## 8.5. Intereses técnicos
+
+Mostrar de forma breve las áreas que me interesan:
+
+- Algorithms & Competitive Programming.
+- Backend Engineering.
+- Distributed Systems.
+- Operating Systems.
+
+No presentarlas como especializaciones profesionales consolidadas. Son áreas de interés y aprendizaje.
+
+## 8.6. Journal
+
+Debe existir una invitación clara para visitar el blog técnico.
+
+Aunque inicialmente no haya publicaciones, el apartado debe tener presencia en Home.
+
+## 8.7. Beyond Code
+
+Incluir una invitación que conecte con la parte más personal del sitio.
+
+El contenido detallado de Beyond Code se definirá después.
+
+## 8.8. Contact CTA
+
+Finalizar con una llamada sencilla a contactar conmigo.
+
+No utilizar frases motivacionales genéricas.
+
+---
+
+# 9. WORK — PÁGINA DE PROYECTOS
+
+Ruta:
+
+`/work`
+
+## Encabezado
+
+Etiqueta:
+
+`02 / SELECTED WORK`
+
+Título:
+
+`Projects`
+
+Subtítulo:
+
+`Software built to solve real problems.`
+
+Descripción:
+
+`A selection of projects where I've explored software development, system design and practical problem-solving — from early concepts to applications used in real environments.`
+
+La versión española debe ser:
+
+Etiqueta:
+
+`02 / PROYECTOS SELECCIONADOS`
+
+Título:
+
+`Proyectos`
+
+Subtítulo:
+
+`Software creado para resolver problemas reales.`
+
+Descripción:
+
+`Una selección de proyectos en los que he explorado el desarrollo de software, el diseño de sistemas y la resolución de problemas prácticos, desde primeras ideas hasta aplicaciones utilizadas en entornos reales.`
+
+## Proyectos incluidos
+
+Exactamente tres:
+
+1. CORO.
+2. SIA.
+3. Votech.
+
+No añadir filtros de categorías: no necesito un sistema de filtros para tres proyectos.
+
+No agregar proyectos de relleno.
+
+## Diseño de tarjetas
+
+Las tarjetas tendrán una estructura horizontal en escritorio:
+
+- Imagen o preview a la izquierda.
+- Información del proyecto a la derecha.
+
+En móvil:
+
+- Imagen arriba.
+- Información debajo.
+- Acciones accesibles.
+
+Las tres tarjetas deben conservar:
+
+- Las mismas dimensiones de referencia.
+- La misma jerarquía tipográfica.
+- La misma estructura.
+- Separaciones consistentes.
+- Estados de interacción uniformes.
+
+Cada tarjeta puede contener:
+
+- Nombre.
+- Estado.
+- Descripción corta.
+- Tecnologías.
+- Acción para consultar detalles.
+
+No inventar capturas de aplicaciones. Usar material visual real que proporcione o autorice.
+
+## Interacción de tarjetas
+
+La acción de detalles debe abrir un modal o una superposición con información resumida.
+
+Dentro debe existir una acción para acceder a la página individual del proyecto:
+
+`VIEW FULL PROJECT`
+
+Equivalente en español:
+
+`VER PROYECTO COMPLETO`
+
+El modal debe:
+
+- Ser accesible mediante teclado.
+- Tener cierre visible.
+- Cerrar con Escape.
+- Gestionar correctamente el foco.
+- No impedir la navegación.
+- Funcionar en móvil.
+
+## Páginas individuales
+
+Rutas:
+
+- `/work/coro`
+- `/work/sia`
+- `/work/votech`
+
+Plantilla propuesta:
+
+1. Overview.
+2. The problem.
+3. Technical implementation.
+4. My contribution.
+5. Results & learnings.
+6. Gallery.
+7. Source code, when available.
+
+Solo se deben mostrar las secciones para las que haya información real.
+
+No agregar apartados vacíos ni escribir contenido artificial.
+
+---
+
+# 10. PROYECTO: CORO
+
+**Nombre:** CORO.
+
+**Categoría:** Plataforma de participación ciudadana juvenil.
+
+**Estado:** Primera versión funcional (MVP) presentada y preparada para iniciar un piloto.
+
+CORO es uno de los proyectos importantes del portafolio y debe recibir una presentación completa.
+
+## 10.1. Qué es CORO
+
+CORO es una plataforma de participación ciudadana juvenil con trazabilidad.
+
+No es una red social de quejas.
+
+Es una herramienta tecnológica que conecta a los jóvenes con las instituciones públicas para documentar problemas reales de sus comunidades, proponer soluciones y hacer seguimiento a las respuestas institucionales.
+
+Ejemplos de problemas:
+
+- Baches.
+- Basura.
+- Fugas de agua.
+- Otros problemas comunitarios documentables.
+
+## 10.2. Por qué existe
+
+CORO busca abordar la apatía política juvenil y la falta de incidencia real.
+
+La idea central es que la participación no se fomente únicamente mediante discursos, sino demostrando que participar puede producir consecuencias visibles.
+
+Existe una desconexión entre expresar una queja en redes sociales y participar en un proceso organizado que termine en una respuesta institucional.
+
+CORO busca cerrar esa brecha.
+
+Se compartió como contexto una referencia a IDEICE según la cual el 70 % de los jóvenes considera que la política es poco o nada importante.
+
+No publicar este porcentaje en el sitio hasta disponer de la fuente exacta, el estudio correspondiente y una referencia verificable.
+
+No inventar estadísticas ni utilizar la cifra como un hecho confirmado sin comprobarla.
+
+## 10.3. Públicos
+
+CORO tiene tres grupos principales:
+
+### Ciudadanos
+
+Principalmente jóvenes y comunidades.
+
+Podrán:
+
+- Reportar problemas.
+- Unirse a causas existentes.
+- Participar en votaciones y consultas.
+- Consultar el estado de sus reportes.
+
+### Instituciones
+
+Ayuntamientos, ministerios y otras instituciones públicas.
+
+Podrán:
+
+- Recibir reportes.
+- Gestionar casos.
+- Asignar prioridades.
+- Derivar casos a brigadas.
+- Registrar respuestas.
+- Hacer seguimiento de los casos.
+
+### Brigadas de campo
+
+Operarios municipales que atienden los problemas en el terreno.
+
+Podrán:
+
+- Consultar los casos asignados.
+- Ejecutar trabajos.
+- Documentar las intervenciones.
+- Subir evidencias del antes y después.
+
+## 10.4. Dónde se utilizará
+
+El MVP está diseñado para funcionar inicialmente en un municipio piloto de la República Dominicana.
+
+La visión a largo plazo es escalar a toda América Latina y el Caribe.
+
+No mencionar un municipio específico si no se ha proporcionado y confirmado.
+
+## 10.5. Estado y evolución
+
+La primera versión funcional del MVP ha sido presentada y está preparada para iniciar un piloto.
+
+La evolución prevista:
+
+- Fase 1: MVP y piloto municipal.
+- Fase 2: soporte para iOS y operación en múltiples municipios.
+- Fase 3: expansión regional.
+
+Estas fases futuras no deben mostrarse como funcionalidades ya implementadas.
+
+## 10.6. Cómo funciona: ciclo de trazabilidad
+
+CORO tiene un proceso de cinco pasos.
+
+### Paso 1 — Reporte
+
+Un joven utiliza la aplicación Android para:
+
+- Tomar una fotografía.
+- Geolocalizar el problema.
+- Describirlo.
+
+Si ya existe un caso similar cerca, la aplicación puede sugerir sumarse al caso existente en lugar de crear un duplicado.
+
+### Paso 2 — Gestión
+
+El ayuntamiento recibe el reporte en un panel web.
+
+Desde allí puede:
+
+- Revisar el caso.
+- Asignar prioridad.
+- Derivarlo a una brigada.
+
+### Paso 3 — Ejecución en campo
+
+Las brigadas utilizan CORO Campo.
+
+Esta aplicación está diseñada para funcionar incluso sin conexión a internet.
+
+Los operarios pueden atender los casos y subir evidencias del antes y después.
+
+### Paso 4 — Validación
+
+La institución valida la solución y el caso pasa al estado Resuelto.
+
+### Paso 5 — Transparencia
+
+El ciudadano puede seguir el estado del caso desde su teléfono.
+
+Además, un tablero público muestra:
+
+- Qué se reportó.
+- Qué instituciones respondieron.
+- Qué instituciones cumplieron los plazos.
+- Qué casos quedaron vencidos sin respuesta.
+
+## 10.7. Plazo institucional
+
+La propuesta contempla un plazo de respuesta de 15 días.
+
+Cuando una institución no responda dentro del plazo, el caso podrá aparecer en el tablero público como:
+
+`Vencido sin respuesta`
+
+No afirmar que CORO puede obligar legalmente a una institución a responder, salvo que exista un acuerdo institucional o fundamento legal que lo respalde.
+
+La descripción debe presentar el plazo como parte del modelo operativo de CORO.
+
+## 10.8. Cómo se sostiene económicamente
+
+### Acceso ciudadano
+
+$0 para el ciudadano.
+
+El acceso, los reportes y las votaciones no tendrán costo para las personas.
+
+### Suscripciones institucionales
+
+Precios propuestos:
+
+- Plan individual: $4 al mes.
+- Plan institucional: $9 al mes.
+
+### Publicidad ética
+
+Espacios patrocinados exclusivos para instituciones verificadas.
+
+Precios propuestos:
+
+- De $45 a $100 por campaña.
+
+No se venden votos ni influencia política.
+
+Estas cifras representan el modelo económico propuesto. No deben presentarse como ingresos existentes, ventas realizadas ni contratos institucionales confirmados.
+
+## 10.9. Descripción breve para la tarjeta
+
+### English
+
+A civic participation platform connecting young people with public institutions through traceable community reports and institutional responses.
+
+### Español
+
+Una plataforma de participación ciudadana que conecta a los jóvenes con las instituciones públicas mediante reportes comunitarios y respuestas institucionales trazables.
+
+## 10.10. Presentación general en inglés
+
+CORO is a youth civic participation platform designed to connect citizens with public institutions through a transparent, traceable process.
+
+Rather than becoming another social network for complaints, CORO gives young people a way to document real problems in their communities, propose solutions and follow the institutional response.
+
+The platform is designed to turn isolated complaints into organized participation with visible outcomes.
+
+## 10.11. Presentación general en español
+
+CORO es una plataforma de participación ciudadana juvenil diseñada para conectar a las personas con las instituciones públicas mediante un proceso transparente y trazable.
+
+En lugar de convertirse en otra red social de quejas, CORO ofrece a los jóvenes una forma de documentar problemas reales de sus comunidades, proponer soluciones y dar seguimiento a las respuestas institucionales.
+
+La plataforma busca transformar las quejas aisladas en participación organizada con resultados visibles.
+
+## 10.12. Elevator pitch proporcionado
+
+Este guion puede utilizarse como referencia narrativa o como material complementario del proyecto. No es obligatorio publicarlo íntegramente en la página.
+
+"Imagina que ves un bache frente a tu casa, lo reportas por redes sociales y no pasa nada. CORO cambia eso. Es una app que permite a los jóvenes reportar problemas de su comunidad con foto y GPS, y obliga a las instituciones a responder en un plazo de 15 días. Si no responden, el caso se marca en un tablero público como 'Vencido sin respuesta'. Para los ayuntamientos, es un panel de gestión; para las brigadas en la calle, una app que funciona sin internet. CORO es gratis para las personas, se financia con servicios para instituciones, y su misión es clara: que la participación juvenil no se quede en un 'me gusta', sino que se convierta en una solución real con nombre y apellido."
+
+Importante: la palabra "obliga" pertenece al guion de presentación. No convertirla en una afirmación jurídica en el portafolio sin confirmar el respaldo legal correspondiente.
+
+## 10.13. Información técnica pendiente
+
+Todavía no se ha proporcionado la información técnica completa de CORO.
+
+No inventar:
+
+- Lenguajes de programación.
+- Frameworks.
+- Bases de datos.
+- Arquitectura.
+- Infraestructura.
+- Autenticación.
+- Hosting.
+- Equipo de desarrollo.
+- Resultados de rendimiento.
+- Cantidad de usuarios.
+- Integraciones.
+- Acuerdos con instituciones.
+
+La plataforma tiene una aplicación Android para ciudadanos, un panel web institucional, CORO Campo y un tablero público como parte de su propuesta funcional.
+
+Los detalles técnicos se incorporarán cuando sean proporcionados.
+
+---
+
+# 11. PROYECTO: SIA
+
+**Nombre completo:** Sistema Interno Académico.
+
+**Institución relacionada:** IPMHU.
+
+**Estado:** Proyecto anterior. No está activo ni se mantiene actualmente.
+
+SIA fue un proyecto enfocado en procesos académicos y administrativos del Instituto Politécnico Max Henríquez Ureña.
+
+El sistema exploró la integración de servicios backend, administración de bases de datos y control de acceso basado en roles.
+
+## Presentación en inglés
+
+SIA (Sistema Interno Académico) was a project focused on academic and administrative processes at Instituto Politécnico Max Henríquez Ureña.
+
+The system explored the integration of backend services, database management and role-based access control to support different institutional responsibilities.
+
+## Presentación en español
+
+SIA (Sistema Interno Académico) fue un proyecto enfocado en los procesos académicos y administrativos del Instituto Politécnico Max Henríquez Ureña.
+
+El sistema exploró la integración de servicios backend, gestión de bases de datos y control de acceso basado en roles para dar soporte a distintas responsabilidades institucionales.
+
+## Tecnologías utilizadas históricamente
+
+- Node.js.
+- Express.
+- REST API.
+- PostgreSQL.
+- Microsoft SQL Server.
+- JWT.
+- Helmet.
+- Jest.
+- PDFKit.
+
+## Roles contemplados
+
+- Administrador.
+- Docente.
+- Estudiante.
+- Coordinación.
+- Orientación.
+
+## Estado y restricciones
+
+SIA es un proyecto pasado.
+
+No lo mantengo, no lo actualizo y no debe presentarse como un producto que actualmente administro.
+
+No afirmar que está desplegado, disponible o en producción.
+
+No insinuar que continúa recibiendo soporte.
+
+No inventar métricas actuales, resultados ni adopción institucional.
+
+Se han mencionado históricamente cifras de usuarios, pero no deben publicarse como métricas verificadas sin confirmar los números y su contexto.
+
+No es necesario explicar públicamente todas las dificultades técnicas o circunstancias administrativas que rodearon su finalización.
+
+### Descripción breve para tarjeta
+
+**English:**
+
+An academic and administrative management system developed for IPMHU, exploring backend architecture, database management and role-based access control.
+
+**Español:**
+
+Un sistema de gestión académica y administrativa desarrollado para IPMHU, que exploró arquitectura backend, gestión de bases de datos y control de acceso basado en roles.
+
+---
+
+# 12. PROYECTO: VOTECH
+
+**Estado:** Proyecto desarrollado y utilizado durante una feria escolar.
+
+Votech fue una plataforma desarrollada para una feria escolar, con el propósito de ofrecer una forma digital de explorar los proyectos participantes, votar y consultar resultados.
+
+Fue desarrollado de manera independiente.
+
+La aplicación se utilizó durante el evento escolar y soportó aproximadamente 500 usuarios simultáneos sin interrupciones.
+
+## Presentación en inglés
+
+Votech is a platform developed for a school fair, providing a digital way to explore participating projects, cast votes and access results.
+
+The application was developed independently and used during the school's event. It supported approximately 500 simultaneous users without interruptions.
+
+The backend was built with TypeScript and Express, using Supabase for data management. A custom JWT-based authentication system and a REST API handled the application's main operations, including projects, votes and results.
+
+I developed the application independently, taking responsibility for its implementation and technical decisions.
+
+## Presentación en español
+
+Votech es una plataforma desarrollada para una feria escolar que ofrece una forma digital de explorar los proyectos participantes, emitir votos y consultar los resultados.
+
+La aplicación fue desarrollada de manera individual y utilizada durante el evento escolar. Soportó aproximadamente 500 usuarios simultáneos sin interrupciones.
+
+El backend fue construido con TypeScript y Express, utilizando Supabase para la gestión de datos. Un sistema de autenticación JWT personalizado y una API REST gestionaban las operaciones principales de la aplicación, incluidos los proyectos, los votos y los resultados.
+
+Desarrollé la aplicación de manera independiente, asumiendo la responsabilidad de su implementación y de las decisiones técnicas.
+
+## Tecnologías
+
+- TypeScript.
+- Express.
+- Supabase.
+- JWT.
+- REST API.
+
+## Resultado principal
+
+Aproximadamente 500 usuarios simultáneos sin interrupciones durante el evento.
+
+Esta cifra debe conservar el contexto del evento escolar. No transformarla en una afirmación de capacidad máxima certificada, benchmark o rendimiento bajo pruebas de laboratorio.
+
+## Mejoras previstas
+
+- Refactorización del proyecto.
+- Encuestas relacionadas con la feria.
+- Sistema de comentarios para cada proyecto.
+
+Estas mejoras están previstas, no implementadas.
+
+No mostrarlas como funcionalidades actuales.
+
+## Descripción breve para tarjeta
+
+### English
+
+A platform developed for a school fair, supporting project discovery, voting and results.
+
+### Español
+
+Una plataforma desarrollada para una feria escolar que permite explorar proyectos, votar y consultar resultados.
+
+---
+
+# 13. ABOUT — PÁGINA COMPLETA
+
+Ruta:
+
+`/about`
+
+Esta página debe profundizar en mi perfil, formación e intereses.
+
+## Diseño
+
+En escritorio:
+
+- Composición editorial de dos columnas.
+- El texto debe ser el elemento principal.
+- Una fotografía real complementará el contenido.
+- La fotografía no debe dominar la composición.
+
+En móvil:
+
+- Imagen y texto apilados.
+- Sin recortes desproporcionados.
+- Mantener la jerarquía y el ritmo de lectura.
+
+## Fotografía
+
+Se utilizará una fotografía real que proporcionaré.
+
+Características deseadas:
+
+- Encuadre de pecho hacia arriba.
+- Apariencia profesional y natural.
+- Fondo sobrio.
+- Buena iluminación.
+- Sin apariencia artificial.
+
+No generar una fotografía falsa para representar mi identidad.
+
+## Texto principal en inglés
+
+I'm Darlyng Mateo, a software developer from Santo Domingo, Dominican Republic, currently studying Application Development and Administration at Instituto Politécnico Max Henríquez Ureña.
+
+My interest in software development goes beyond building applications. I'm curious about how things work beneath the surface: how algorithms solve problems, how backend systems handle information, and how different components come together to form reliable software.
+
+I've worked on projects involving web development, databases and backend systems, learning to approach problems through experimentation, problem-solving and continuous improvement.
+
+I'm still developing my foundations, exploring new areas of computer science and looking for opportunities to build more meaningful and technically challenging software.
+
+## Texto principal en español
+
+Soy Darlyng Mateo, desarrollador de software de Santo Domingo, República Dominicana. Actualmente estudio Desarrollo y Administraciones de Aplicaciones Informáticas en el Instituto Politécnico Max Henríquez Ureña.
+
+Mi interés por el desarrollo de software va más allá de construir aplicaciones. Me da curiosidad comprender lo que ocurre detrás de ellas: cómo los algoritmos resuelven problemas, cómo los sistemas backend gestionan información y cómo distintos componentes se integran para construir software confiable.
+
+He trabajado en proyectos relacionados con desarrollo web, bases de datos y sistemas backend, aprendiendo a abordar problemas mediante la experimentación, la resolución de problemas y la mejora continua.
+
+Todavía estoy fortaleciendo mis fundamentos, explorando nuevas áreas de las ciencias de la computación y buscando oportunidades para construir software cada vez más interesante y técnicamente exigente.
+
+## Intereses técnicos
+
+Estos cuatro apartados deben conservarse.
+
+### 1. Algorithms & Competitive Programming
+
+Problem-solving, algorithm design and computational thinking.
+
+En español:
+
+Resolución de problemas, diseño de algoritmos y pensamiento computacional.
+
+### 2. Backend Engineering
+
+Server-side architecture, APIs, databases and application logic.
+
+En español:
+
+Arquitectura del lado del servidor, APIs, bases de datos y lógica de aplicaciones.
+
+### 3. Distributed Systems
+
+Communication, coordination and scalability across interconnected systems.
+
+En español:
+
+Comunicación, coordinación y escalabilidad entre sistemas interconectados.
+
+### 4. Operating Systems
+
+Processes, memory, resource management and the software beneath applications.
+
+En español:
+
+Procesos, memoria, administración de recursos y el software que funciona debajo de las aplicaciones.
+
+## Where I'm heading
+
+### English
+
+My long-term goal is to develop a deeper understanding of computer science and work on systems where performance, reliability and thoughtful engineering really matter.
+
+I'm particularly drawn to high-performance backend systems, distributed computing and operating systems. For now, I'm focused on strengthening my fundamentals, learning through challenging problems and building the experience needed to explore these areas further.
+
+### Español
+
+Mi objetivo a largo plazo es desarrollar una comprensión más profunda de las ciencias de la computación y trabajar en sistemas donde el rendimiento, la confiabilidad y las decisiones de ingeniería realmente importen.
+
+Me interesan especialmente los sistemas backend de alto rendimiento, la computación distribuida y los sistemas operativos. Por ahora, estoy enfocado en fortalecer mis fundamentos, aprender mediante problemas exigentes y adquirir la experiencia necesaria para profundizar en estas áreas.
+
+## CTA final
+
+Al final de About debe existir una invitación a conocer la parte personal.
+
+Texto conceptual:
+
+`Want to know more about who I am beyond code?`
+
+Botón:
+
+`DISCOVER BEYOND CODE ↗`
+
+Versión española:
+
+`¿Quieres conocer más sobre quién soy más allá del código?`
+
+Botón:
+
+`DESCUBRE BEYOND CODE ↗`
+
+---
+
+# 14. SKILLS & TECHNOLOGIES
+
+Las tecnologías deben mostrarse agrupadas por categorías.
+
+No utilizar gráficos de porcentajes inventados.
+
+No utilizar barras de progreso para representar habilidades.
+
+No usar niveles arbitrarios como 90 %, 75 % o 100 %.
+
+La presentación debe ser sobria, clara y honesta.
+
+## Categorías y tecnologías
+
+### Programming languages
+
+- C++.
+- Python.
+- JavaScript.
+- TypeScript.
+
+### Frontend
+
+- HTML.
+- CSS.
+- React.
+
+### Backend
+
+- Node.js.
+- Express.
+
+### Databases
+
+- PostgreSQL.
+- Microsoft SQL Server.
+
+### Tools & environment
+
+- Git.
+- GitHub.
+- Linux.
+- Visual Studio Code.
+- Neovim.
+
+Mi dominio de estas tecnologías no es uniforme. No se debe insinuar que todas tienen un nivel avanzado.
+
+Las tecnologías mencionadas son herramientas con las que he trabajado; no necesariamente representan especializaciones profesionales.
+
+Las valoraciones de nivel que se han comentado anteriormente son orientativas y deben confirmarse antes de mostrarlas públicamente.
+
+La redacción debe favorecer expresiones como:
+
+- Technologies I've worked with.
+- Tools and technologies.
+- Areas I'm exploring.
+
+Evitar expresiones como:
+
+- Master of all technologies.
+- Expert developer.
+- Advanced in everything.
+
+---
+
+# 15. CERTIFICATES & CREDENTIALS
+
+Quiero un apartado propio de certificados y credenciales.
+
+Este apartado se decidió después de definir las demás páginas porque cuento con certificados valiosos que quiero mostrar, especialmente el de CertiPlus.
+
+## Nombre
+
+English:
+
+`Certificates & Credentials`
+
+Español:
+
+`Certificaciones y credenciales`
+
+## Introducción en inglés
+
+A collection of certifications and learning achievements that document my progress and technical development.
+
+## Introducción en español
+
+Una colección de certificaciones y logros formativos que documentan mi progreso y desarrollo técnico.
+
+## Certificado conocido
+
+**CertiPlus Full Stack Expert**
+
+Este certificado debe estar incluido.
+
+No inventar su fecha, número de validación, institución emisora adicional, calificación ni URL de verificación.
+
+Se utilizará el documento real que proporcionaré.
+
+## Diseño
+
+Cada certificado puede presentarse en una tarjeta con:
+
+- Nombre.
+- Organización emisora.
+- Fecha de emisión, si está disponible.
+- Descripción breve, si aporta valor.
+- Enlace de verificación, si existe.
+- Vista ampliada o acceso al documento original.
+
+## Interacción
+
+El usuario debe poder abrir el certificado y consultar el documento real.
+
+No generar imágenes falsas de certificados.
+
+No reemplazar los archivos originales por diseños inventados que parezcan credenciales oficiales.
+
+El componente debe permitir agregar certificados nuevos en el futuro sin rediseñar toda la página.
+
+La sección debe quedar preparada para crecer.
+
+## Información pendiente
+
+Proporcionaré los documentos reales de los certificados.
+
+Hasta entonces no inventar otros certificados ni llenar la página con contenido ficticio.
+
+---
+
+# 16. JOURNAL
+
+Ruta:
+
+`/journal`
+
+El Journal será un blog técnico.
+
+No será un diario personal ni un registro privado de investigación.
+
+Su propósito será publicar artículos técnicos, ideas y exploraciones sobre desarrollo de software y ciencias de la computación.
+
+## Inglés
+
+Título:
+
+`Journal`
+
+Subtítulo:
+
+`Technical articles, ideas and explorations about software development and computer science.`
+
+Estado vacío:
+
+`Nothing published yet.`
+
+`I'm working on the ideas and technical explorations that will appear here. Check back soon.`
+
+## Español
+
+Título:
+
+`Journal`
+
+Subtítulo:
+
+`Artículos técnicos, ideas y exploraciones sobre desarrollo de software y ciencias de la computación.`
+
+Estado vacío:
+
+`Todavía no hay publicaciones.`
+
+`Estoy trabajando en las ideas y exploraciones técnicas que aparecerán aquí. Vuelve pronto.`
+
+## Estado inicial
+
+El blog estará vacío al principio.
+
+No crear artículos falsos.
+
+No inventar fechas, títulos, categorías o extractos.
+
+La página debe verse intencional y bien diseñada aunque todavía no existan publicaciones.
+
+## Evolución prevista
+
+Cuando haya contenido real, los artículos podrán incluir:
+
+- Título.
+- Fecha.
+- Categoría.
+- Extracto.
+- Contenido completo.
+- Código.
+- Diagramas cuando sean útiles.
+- Imágenes técnicas cuando aporten valor.
+
+Las categorías concretas se decidirán más adelante.
+
+Se utilizará una estructura que facilite administrar y publicar artículos sin modificar manualmente todo el sitio.
+
+---
+
+# 17. BEYOND CODE
+
+Ruta:
+
+`/beyond-code`
+
+Esta sección tiene una función diferente a Journal.
+
+Mientras Journal se enfoca en temas técnicos, Beyond Code representa mis intereses personales, ideas y perspectivas fuera de la programación.
+
+## Concepto
+
+English:
+
+`There's more to curiosity than code.`
+
+`This is a space for the ideas, books, reflections and interests that shape the way I see the world beyond software.`
+
+Español:
+
+`La curiosidad va más allá del código.`
+
+`Este es un espacio para las ideas, los libros, las reflexiones y los intereses que influyen en mi forma de ver el mundo más allá del software.`
+
+## Ubicación
+
+- No aparecerá en el menú principal.
+- Tendrá acceso desde Home.
+- Tendrá acceso desde la parte inferior de About.
+- Mantendrá una página independiente.
+
+## Contenido pendiente
+
+Todavía no se ha definido completamente qué temas personales quiero publicar.
+
+No inventar:
+
+- Libros favoritos.
+- Autores.
+- Opiniones políticas.
+- Creencias.
+- Reflexiones personales.
+- Pasatiempos.
+- Experiencias privadas.
+- Intereses culturales.
+
+La estructura debe quedar preparada, pero su contenido detallado se desarrollará posteriormente conmigo.
+
+No convertir esta sección en un blog técnico adicional.
+
+---
+
+# 18. CONTACT
+
+Ruta:
+
+`/contact`
+
+## Mensaje en inglés
+
+Interested in working together or discussing a professional opportunity? Feel free to reach out. I'm always glad to connect.
+
+## Mensaje en español
+
+¿Te interesa colaborar o conversar sobre una oportunidad profesional? No dudes en escribirme. Siempre será un placer conectar.
+
+## Datos
+
+Email:
+
+`mateodarlyng5@gmail.com`
+
+GitHub:
+
+`https://github.com/darlyng405`
+
+LinkedIn:
+
+`https://www.linkedin.com/in/darlyng-mateo-peral-7031793a6`
+
+## Diseño
+
+- Mostrar el correo como elemento principal.
+- GitHub y LinkedIn deben aparecer como tarjetas o enlaces visuales reconocibles.
+- Utilizar sus iconos.
+- Mostrar el nombre de cada plataforma.
+- Mantener un tamaño razonable.
+- Añadir estados hover y focus.
+
+No utilizar tarjetas gigantes que compitan con el correo.
+
+## Comportamiento
+
+El correo utilizará:
+
+`mailto:mateodarlyng5@gmail.com`
+
+Debe abrir la aplicación de correo predeterminada del usuario.
+
+No forzar Gmail.
+
+No implementar un formulario de contacto ni un backend solo para este apartado.
+
+No recopilar datos innecesarios.
+
+---
+
+# 19. CV / CURRICULUM VITAE
+
+Ya tengo mi CV preparado en PDF.
+
+Proporcionaré los archivos reales a la IA de desarrollo.
+
+No reconstruir el CV inventando información.
+
+No alterar su contenido sin autorización.
+
+## Dos versiones
+
+English:
+
+`Darlyng-Mateo-CV-EN.pdf`
+
+Español:
+
+`Darlyng-Mateo-CV-ES.pdf`
+
+## Requisitos
+
+- Dos botones de descarga independientes.
+- Descarga directa del PDF correspondiente.
+- Ambas versiones deben estar disponibles sin importar el idioma actual del sitio.
+- No forzar una versión según el idioma seleccionado.
+- No recopilar datos para permitir la descarga.
+- No mostrar botones que apunten a documentos inexistentes.
+- No generar CV ficticios si todavía no se han proporcionado los archivos.
+
+La ubicación visual exacta de los botones deberá integrarse con el diseño, preferiblemente en About o un punto contextual relacionado con el perfil profesional.
+
+---
+
+# 20. FOOTER
+
+El footer debe ser minimalista.
+
+Incluir:
+
+- Darlyng Mateo.
+- Enlaces de navegación principales.
+- GitHub.
+- LinkedIn.
+- Año de copyright actualizado automáticamente.
+
+No añadir:
+
+- Frases motivacionales genéricas.
+- Párrafos innecesarios.
+- Bloques enormes de enlaces.
+- Información personal privada.
+- Elementos decorativos exagerados.
+
+El footer debe mantener la identidad visual del sitio y funcionar correctamente en móvil.
+
+---
+
+# 21. PÁGINA 404
+
+Crear una página personalizada de error 404.
+
+No utilizar una pantalla genérica del servidor.
+
+## Elemento principal
+
+`404`
+
+## Mensaje en inglés
+
+`This page doesn't exist.`
+
+`Don't worry, something went wrong — but it wasn't your fault.`
+
+## Mensaje en español
+
+`Esta página no existe.`
+
+`Tranquilo, algo falló, pero no fue tu culpa.`
+
+## Acciones
+
+- Botón para volver a Home.
+- Enlace hacia Work.
+
+## Diseño
+
+- Mantener el sistema visual del sitio.
+- Usar una animación sutil.
+- No convertir el error en una página demasiado elaborada.
+- Traducir todo de acuerdo con el idioma activo.
+
+---
+
+# 22. ANIMACIONES Y MICROINTERACCIONES
+
+Las animaciones deben aportar continuidad, respuesta visual o personalidad.
+
+Se aprobaron cinco familias de animaciones.
+
+## 22.1. Entrada escalonada del Hero
+
+Los elementos del Hero pueden aparecer de manera escalonada:
+
+- Etiqueta.
+- Título.
+- Descripción.
+- Botones.
+- Tarjeta de código.
+
+La animación debe ser breve y discreta.
+
+No hacer que el usuario espere para leer el contenido.
+
+## 22.2. Interacción de tarjetas de proyectos
+
+Al pasar el cursor por una tarjeta:
+
+- Zoom muy leve de la imagen.
+- Borde de acento sutil.
+- Pequeño desplazamiento del indicador o flecha.
+- Transición natural.
+
+No utilizar efectos exagerados.
+
+## 22.3. Transición entre páginas
+
+Transiciones cortas de:
+
+- Opacidad.
+- Movimiento sutil.
+
+No bloquear la navegación ni provocar retrasos perceptibles.
+
+## 22.4. Detalles vivos
+
+Se aprobaron:
+
+- Efecto inicial corto de escritura en la tarjeta de código.
+- Subrayados animados en enlaces.
+- Transición del indicador de navegación.
+
+No mantener animaciones constantes sin motivo.
+
+## 22.5. Aparición al hacer scroll
+
+Los elementos pueden aparecer discretamente cuando entran en el área visible.
+
+No utilizar desplazamientos grandes ni efectos que oculten contenido.
+
+## Interacciones adicionales
+
+Todos los botones y enlaces deben tener estados:
+
+- Hover.
+- Focus.
+- Active.
+
+Cambios de idioma y tema con transiciones suaves.
+
+Los efectos en móvil deben ser más ligeros y no depender del hover.
+
+## Accesibilidad de movimiento
+
+Respetar:
+
+`prefers-reduced-motion`
+
+Cuando el usuario solicita reducir movimiento:
+
+- Evitar animaciones decorativas.
+- Eliminar efectos de escritura que no sean necesarios.
+- Utilizar alternativas estáticas.
+- Mantener todas las funciones disponibles.
+
+## Efectos rechazados
+
+No utilizar:
+
+- Cursores personalizados.
+- Partículas.
+- Glitch.
+- Parallax agresivo.
+- Animaciones permanentes.
+- Efectos de entrada demasiado largos.
+- Elementos que se muevan constantemente sin aportar información.
+
+---
+
+# 23. ESTADOS DE CARGA Y EXPERIENCIA DE USUARIO
+
+La experiencia no debe mostrar pantallas vacías o desordenadas mientras carga contenido.
+
+## Skeletons
+
+Utilizar skeletons únicamente cuando exista una espera real.
+
+Requisitos:
+
+- Mantener las dimensiones aproximadas del contenido que aparecerá.
+- Animación de brillo sutil.
+- Alternativa estática cuando se reduzca el movimiento.
+- No bloquear la navegación.
+- No ocultar contenido que ya está disponible.
+- Mostrar un estado de error útil cuando corresponda.
+- No dejar skeletons cargando indefinidamente.
+
+No usar skeletons como decoración.
+
+## Carga progresiva
+
+Priorizar:
+
+1. HTML y contenido principal.
+2. Navegación y controles fundamentales.
+3. Elementos visuales secundarios.
+4. Imágenes y recursos no esenciales.
+
+Reservar las dimensiones de imágenes y componentes para evitar saltos de diseño.
+
+Aplicar lazy loading cuando tenga sentido.
+
+El contenido principal debe permanecer accesible incluso si JavaScript falla.
+
+Astro debe generar HTML estático siempre que sea posible.
+
+---
+
+# 24. STACK TECNOLÓGICO
+
+La tecnología debe servir al proyecto, no al revés.
+
+## Stack elegido
+
+- Astro.
+- TypeScript.
+- CSS moderno.
+- Astro Content Collections.
+- Vitest.
+- Playwright.
+- ESLint.
+- Prettier.
+- Git.
+- GitHub.
+- Vercel.
+
+## Decisiones explícitas
+
+- No utilizar React.
+- Priorizar TypeScript sobre JavaScript.
+- Evitar dependencias innecesarias.
+- No introducir librerías grandes para resolver interacciones sencillas.
+- Utilizar componentes Astro para la mayor parte de la interfaz.
+- Utilizar JavaScript del cliente únicamente cuando exista una necesidad real.
+- Mantener el sitio rápido, mantenible y fácil de ampliar.
+
+## Estructura de carpetas propuesta
+
+```text
+portfolio/
+├── public/
+│   ├── images/
+│   ├── icons/
+│   └── fonts/
+│
+├── src/
+│   ├── components/
+│   ├── layouts/
+│   ├── pages/
+│   ├── content/
+│   ├── data/
+│   ├── i18n/
+│   ├── styles/
+│   ├── types/
+│   └── utils/
+│
+├── tests/
+│
+├── astro.config.ts
+├── tsconfig.json
+└── package.json
+```
+
+La estructura puede ampliarse cuando sea necesario, pero debe conservar la separación entre:
+
+- Componentes.
+- Layouts.
+- Páginas.
+- Contenido.
+- Datos.
+- Traducciones.
+- Estilos.
+- Tipos.
+- Utilidades.
+- Pruebas.
+
+No mezclar todo el contenido en un único archivo.
+
+## Gestión del contenido
+
+Los proyectos, artículos y certificados deben tener una estructura de datos clara.
+
+El sitio debe permitir agregar contenido sin tener que modificar manualmente múltiples componentes.
+
+Utilizar Astro Content Collections cuando corresponda.
+
+TypeScript debe ayudar a detectar errores de estructura.
+
+---
+
+# 25. RESPONSIVE DESIGN
+
+El diseño debe funcionar correctamente en:
+
+- Escritorio.
+- Laptop.
+- Tablet.
+- Teléfono móvil.
+
+No tratar el responsive como una tarea final.
+
+Debe formar parte del diseño desde el principio.
+
+## Escritorio
+
+- Mantener la composición editorial.
+- Aprovechar el espacio horizontal.
+- Evitar párrafos excesivamente largos.
+- No estirar tarjetas sin necesidad.
+- Mantener proporciones visuales equilibradas.
+
+## Tablet
+
+- Adaptar las columnas.
+- Reducir los espacios cuando sea necesario.
+- Mantener el contenido completo.
+- No usar una versión móvil estirada.
+- Evitar que el encabezado se rompa.
+
+## Móvil
+
+- Una columna cuando corresponda.
+- Menú accesible.
+- Botones cómodos de pulsar.
+- Tipografía legible.
+- Tarjetas apiladas.
+- Imágenes correctamente proporcionadas.
+- Sin desbordamiento horizontal.
+- Sin ocultar contenido importante.
+
+Probar al menos las resoluciones de referencia de los mockups y otros tamaños intermedios.
+
+---
+
+# 26. ACCESIBILIDAD
+
+Objetivo:
+
+**WCAG 2.2 AA.**
+
+La accesibilidad debe incorporarse durante el desarrollo.
+
+## Requisitos
+
+- HTML semántico.
+- Navegación mediante teclado.
+- Orden lógico del foco.
+- Indicadores de foco visibles.
+- Contraste suficiente.
+- Etiquetas accesibles.
+- Nombres comprensibles para lectores de pantalla.
+- Texto alternativo para imágenes informativas.
+- Imágenes decorativas correctamente marcadas.
+- Zoom y reflujo sin pérdida de contenido.
+- Menú móvil accesible.
+- Modales accesibles.
+- Cierre de modales mediante Escape.
+- Gestión adecuada del foco.
+- No depender únicamente del color para comunicar estados.
+- Respetar `prefers-reduced-motion`.
+
+No sacrificar accesibilidad por efectos visuales.
+
+---
+
+# 27. SEO
+
+Cada página debe tener metadatos propios.
+
+## Requisitos
+
+- Título específico por página.
+- Meta description específica.
+- Open Graph.
+- Favicon.
+- Sitemap.
+- robots.txt.
+- URLs limpias.
+- Metadatos bilingües.
+- Enlaces internos coherentes.
+- HTML indexable sin depender de JavaScript.
+- Canonical cuando corresponda.
+- Datos estructurados cuando aporten valor real.
+
+Las páginas de proyectos deben tener sus propios títulos y descripciones.
+
+Las páginas de certificados y artículos también deben tener metadatos específicos.
+
+La estrategia de URLs bilingües se debe decidir antes de cerrar las etiquetas hreflang, canonical y sitemap.
+
+No crear información estructurada falsa.
+
+No inventar reseñas, empresas, empleos, certificaciones ni métricas para mejorar artificialmente el SEO.
+
+---
+
+# 28. PRIVACIDAD Y SEGURIDAD
+
+- HTTPS obligatorio.
+- No recopilar datos innecesarios.
+- No introducir cookies de seguimiento innecesarias.
+- No introducir anuncios.
+- No instalar herramientas de tracking no aprobadas.
+- No exponer secretos en el frontend.
+- No colocar claves privadas en el repositorio.
+- Mantener dependencias actualizadas.
+- Evitar dependencias sin necesidad.
+- Utilizar `rel="noopener noreferrer"` en enlaces externos que abran otra pestaña.
+- No implementar formularios o sistemas que requieran almacenar datos personales sin una necesidad real.
+
+## Analítica
+
+Está aprobada:
+
+**Vercel Web Analytics.**
+
+No utilizar Google Analytics 4 por ahora.
+
+No incorporar analítica adicional sin consultarlo.
+
+---
+
+# 29. RENDIMIENTO
+
+El rendimiento es importante, especialmente porque el objetivo es construir un sitio rápido y limpio.
+
+Prioridades:
+
+- HTML estático cuando sea posible.
+- JavaScript mínimo.
+- Imágenes optimizadas.
+- Lazy loading para recursos no esenciales.
+- Dimensiones reservadas para evitar CLS.
+- Carga progresiva.
+- Evitar librerías innecesariamente pesadas.
+- Evitar animaciones que consuman recursos sin aportar valor.
+- Evitar renderizados innecesarios.
+- Mantener el CSS organizado.
+
+Prestar atención a Core Web Vitals.
+
+Lighthouse debe formar parte de la revisión.
+
+No perseguir una puntuación artificial si para conseguirla hay que eliminar contenido o funcionalidades importantes.
+
+---
+
+# 30. GIT, GITHUB Y DESPLIEGUE
+
+El código estará alojado en GitHub.
+
+El sitio se desplegará en Vercel.
+
+## Flujo de trabajo
+
+Se utilizarán:
+
+- Rama `main`: producción.
+- Rama de desarrollo: trabajo y cambios antes de producción.
+- Preview Deployments para revisar modificaciones.
+- Despliegue automático de producción desde `main`.
+
+No enviar cambios sin revisar directamente a producción cuando puedan afectar componentes importantes.
+
+## Dominio
+
+Inicialmente se utilizará un subdominio de Vercel.
+
+En el futuro podría utilizarse un dominio propio, posiblemente `.dev`.
+
+No es necesario comprar o configurar el dominio definitivo ahora.
+
+## Verificación del despliegue
+
+Comprobar:
+
+- Build.
+- Rutas.
+- Navegación.
+- Imágenes.
+- Descargas.
+- Traducciones.
+- Persistencia del tema.
+- Persistencia del idioma.
+- Responsive.
+- Metadatos.
+- Página 404.
+
+---
+
+# 31. PRUEBAS Y CONTROL DE CALIDAD
+
+No considerar terminado el portafolio solo porque se visualice correctamente en una primera captura.
+
+## Pruebas funcionales
+
+Comprobar:
+
+- Navegación principal.
+- Enlaces internos.
+- Enlaces externos.
+- Cambio de idioma.
+- Persistencia del idioma.
+- Cambio de tema.
+- Persistencia del tema.
+- Modales de proyectos.
+- Cierre de modales.
+- Navegación hacia páginas individuales.
+- Descarga de CV.
+- Visualización de certificados.
+- Enlaces a GitHub y LinkedIn.
+- Estados vacíos.
+- Estados de error.
+- Página 404.
+- Menú móvil.
+
+## Pruebas visuales
+
+Comprobar las seis combinaciones de dispositivos y temas.
+
+Buscar:
+
+- Elementos cortados.
+- Textos fuera de contenedor.
+- Tarjetas de tamaños inconsistentes.
+- Colores incorrectos.
+- Contraste insuficiente.
+- Espaciado incoherente.
+- Elementos desaparecidos.
+- Desbordamiento horizontal.
+- Imágenes deformadas.
+- Botones demasiado pequeños.
+
+## Pruebas técnicas
+
+Utilizar:
+
+- TypeScript.
+- ESLint.
+- Prettier.
+- Vitest.
+- Playwright.
+
+No ignorar errores importantes de compilación o tipos.
+
+## Pruebas de rendimiento
+
+- Lighthouse.
+- Core Web Vitals.
+- Peso de imágenes.
+- JavaScript enviado al cliente.
+- CLS.
+- Carga inicial.
+
+---
+
+# 32. CONTENIDO Y ASSETS QUE PROPORCIONARÉ
+
+Hay recursos que se entregarán aparte y no deben inventarse.
+
+## Fotografía
+
+Proporcionaré una fotografía personal real para About.
+
+## CV
+
+Proporcionaré:
+
+- `Darlyng-Mateo-CV-EN.pdf`
+- `Darlyng-Mateo-CV-ES.pdf`
+
+## Certificados
+
+Proporcionaré los documentos reales.
+
+El primero que debe contemplarse es:
+
+- CertiPlus Full Stack Expert.
+
+## CORO
+
+Proporcionaré más adelante la información técnica completa y otros recursos relacionados con la implementación.
+
+## Imágenes de proyectos
+
+Las capturas, logos o imágenes específicas de los proyectos deben provenir de recursos reales que proporcione o autorice.
+
+No generar interfaces falsas como si fueran capturas del producto real.
+
+---
+
+# 33. DECISIONES PENDIENTES Y LÍMITES
+
+Estos puntos deben conservarse como pendientes. No resolverlos mediante suposiciones.
+
+## 33.1. Acento del modo claro
+
+El tono lima eléctrico resulta demasiado intenso en el modo claro.
+
+Se propuso `#899447` como alternativa.
+
+Falta validación visual final.
+
+## 33.2. Estrategia de URLs bilingües
+
+Debe decidirse la forma definitiva de manejar las rutas en inglés y español y su relación con SEO.
+
+## 33.3. Contenido de Beyond Code
+
+La sección existirá, pero su contenido se definirá más adelante.
+
+No inventar mis intereses personales.
+
+## 33.4. Información técnica de CORO
+
+La descripción funcional está documentada.
+
+Faltan detalles de tecnologías, arquitectura, infraestructura y decisiones de implementación.
+
+No inventarlos.
+
+## 33.5. Certificados
+
+Se integrarán los archivos originales que proporcionaré.
+
+No inventar certificados adicionales.
+
+## 33.6. CV
+
+Se utilizarán los dos PDF originales que proporcionaré.
+
+No reconstruirlos a partir de información incompleta.
+
+## 33.7. Fotografía de About
+
+Estoy pendiente de proporcionar una fotografía real.
+
+No generar una persona artificial para sustituirla.
+
+## 33.8. Categorías del Journal
+
+La página empezará vacía. Las categorías se decidirán cuando exista contenido real.
+
+## 33.9. Dominio definitivo
+
+Se comenzará con Vercel. Un dominio propio podrá decidirse más adelante.
+
+---
+
+# 34. CRITERIOS FINALES DE ACEPTACIÓN
+
+El portafolio no se considerará completo hasta cumplir los siguientes puntos:
+
+### Diseño
+
+- [ ] Identidad editorial-tech implementada.
+- [ ] Tema oscuro predeterminado.
+- [ ] Tema claro funcional.
+- [ ] Paletas coherentes.
+- [ ] Tipografías acordadas.
+- [ ] Jerarquía tipográfica respetada.
+- [ ] Seis mockups completos.
+- [ ] Ninguna versión responsive incompleta.
+- [ ] Ningún componente aprobado desaparecido.
+
+### Navegación y páginas
+
+- [ ] Home.
+- [ ] Work.
+- [ ] Journal.
+- [ ] About.
+- [ ] Contact.
+- [ ] Beyond Code.
+- [ ] Certificates.
+- [ ] Página individual de CORO.
+- [ ] Página individual de SIA.
+- [ ] Página individual de Votech.
+- [ ] Página 404.
+
+### Contenido
+
+- [ ] Información personal correcta.
+- [ ] Contenido bilingüe.
+- [ ] Descripciones aprobadas.
+- [ ] CORO correctamente diferenciado de sus futuras fases.
+- [ ] SIA identificado como proyecto anterior.
+- [ ] Votech con la métrica contextualizada.
+- [ ] Sin proyectos inventados.
+- [ ] Sin artículos ficticios.
+- [ ] Certificados reales.
+- [ ] CV originales.
+- [ ] Beyond Code sin contenido inventado.
+
+### Funcionalidad
+
+- [ ] Selector de idioma.
+- [ ] Persistencia del idioma.
+- [ ] Selector de tema.
+- [ ] Persistencia del tema.
+- [ ] Menú móvil.
+- [ ] Modales de proyectos.
+- [ ] Enlaces entre páginas.
+- [ ] Descargas de CV.
+- [ ] Acceso a certificados.
+- [ ] Enlaces de contacto.
+- [ ] Página 404 funcional.
+
+### Calidad
+
+- [ ] Accesibilidad WCAG 2.2 AA como objetivo.
+- [ ] Navegación por teclado.
+- [ ] Estados de foco.
+- [ ] Movimiento reducido.
+- [ ] SEO bilingüe.
+- [ ] HTTPS.
+- [ ] Sin recopilación innecesaria de datos.
+- [ ] Vercel Web Analytics.
+- [ ] Sin Google Analytics 4 por ahora.
+- [ ] Rendimiento revisado.
+- [ ] Pruebas ejecutadas.
+- [ ] Despliegue de producción verificado.
+
+---
+
+# 35. INSTRUCCIÓN FINAL PARA EL DESARROLLO
+
+Este documento representa el conjunto de decisiones acumuladas para el portafolio de Darlyng Mateo.
+
+La prioridad no es terminar lo más rápido posible sacrificando detalles.
+
+La prioridad es construir una web coherente, completa, mantenible, profesional y fiel a la identidad que hemos definido.
+
+**No simplifiques el proyecto eliminando decisiones anteriores.**
+
+Cuando una tarea requiera información que no aparece aquí, pregunta antes de inventarla.
+
+Cuando un detalle visual no esté cerrado, conserva las alternativas y solicita validación.
+
+Cuando una característica sea futura, no la presentes como existente.
+
+Cuando un proyecto sea antiguo, no lo presentes como activo.
+
+Cuando una tecnología se haya utilizado, no conviertas esa experiencia en una afirmación de dominio experto.
+
+Cuando un dato sea aproximado, conserva su contexto.
+
+La web debe representar a un desarrollador que está construyendo su camino en el software y que tiene un interés especial por comprender los sistemas, los algoritmos y la ingeniería que hay detrás de las aplicaciones.
+
+**El resultado debe sentirse como el portafolio de una persona real, no como una plantilla que podría pertenecerle a cualquier desarrollador.**

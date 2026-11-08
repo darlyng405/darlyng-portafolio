@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations, localizedPath } from '../../i18n/utils';
+import type { Lang } from '../../types';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<BaseLayout
+  title="404 — Darlyng Mateo"
+  description={t('notFound.message')}
+>
+  <section class="not-found container" data-reveal>
+    <span class="code">404</span>
+    <h1>{t('notFound.heading')}</h1>
+    <p class="lead" style="margin-top: 4px; text-align: center;">{t('notFound.message')}</p>
+    <div class="btn-row" style="justify-content: center; margin-top: 16px;">
+      <a href={localizedPath('/', lang)} class="btn primary">{t('notFound.home')}</a>
+      <a href={localizedPath('/work', lang)} class="btn">{t('notFound.work')} ↗</a>
+    </div>
+  </section>
+</BaseLayout>

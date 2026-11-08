@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CertificateCard from '../CertificateCard.astro';
+import { certificates } from '../../data/certificates';
+import { useTranslations } from '../../i18n/utils';
+import type { Lang } from '../../types';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<BaseLayout
+  title={t('meta.certificates.title')}
+  description={t('meta.certificates.description')}
+>
+  <section class="section container">
+    <div data-reveal>
+      <span class="eyebrow">{t('certificates.label')}</span>
+      <h1 class="section-title" style="margin-top: 16px;">{t('certificates.title')}</h1>
+      <p class="lead" style="margin-top: 18px;">{t('certificates.subtitle')}</p>
+    </div>
+
+    {certificates.length > 0 ? (
+      <div class="cert-grid">
+        {certificates.map((c) => (
+          <CertificateCard certificate={c} lang={lang} />
+        ))}
+      </div>
+    ) : (
+      <p class="lead" style="margin-top: 40px;">{t('certificates.empty')}</p>
+    )}
+  </section>
+
+  <script>
+    let activeTrigger: HTMLElement | null = null;
+
+    document.querySelectorAll<HTMLButtonElement>('[data-modal-target]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.modalTarget;
+        if (!id) return;
+        const overlay = document.getElementById(id);
+        if (!overlay) return;
+        activeTrigger = btn;
+        overlay.setAttribute('data-open', 'true');
+        document.body.style.overflow = 'hidden';
+        const closeBtn = overlay.querySelector<HTMLButtonElement>('[data-modal-close]');
+        closeBtn?.focus();
+      });
+    });
+
+    document.querySelectorAll<HTMLElement>('.modal-overlay').forEach((overlay) => {
+      const close = () => {
+        overlay.setAttribute('data-open', 'false');
+        document.body.style.overflow = '';
+        activeTrigger?.focus();
+      };
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) close();
+      });
+      overlay.querySelectorAll<HTMLElement>('[data-modal-close]').forEach((b) => {
+        b.addEventListener('click', close);
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && overlay.getAttribute('data-open') === 'true') close();
+      });
+    });
+  </script>
+</BaseLayout>

@@ -10,8 +10,9 @@ type Item = { path: string; key: UIKey };
 const items: Item[] = [
   { path: '/', key: 'nav.home' },
   { path: '/work', key: 'nav.work' },
-  { path: '/journal', key: 'nav.journal' },
+  { path: '/certificates', key: 'nav.certificates' },
   { path: '/about', key: 'nav.about' },
+  { path: '/journal', key: 'nav.journal' },
   { path: '/contact', key: 'nav.contact' },
 ];
 
@@ -32,14 +33,17 @@ const isActive = (path: string) => {
     </a>
 
     <nav class="nav-links" aria-label="Primary">
-      {items.map((item) => (
-        <a
-          href={localizedPath(item.path, lang)}
-          class="nav-link"
-          aria-current={isActive(item.path) ? 'page' : undefined}
-        >
-          {t(item.key)}
-        </a>
+      {items.map((item, index) => (
+        <>
+          {index > 0 && <span class="nav-link-sep" aria-hidden="true">/</span>}
+          <a
+            href={localizedPath(item.path, lang)}
+            class="nav-link"
+            aria-current={isActive(item.path) ? 'page' : undefined}
+          >
+            {t(item.key)}
+          </a>
+        </>
       ))}
     </nav>
 
@@ -78,19 +82,19 @@ const isActive = (path: string) => {
       </button>
     </div>
   </div>
-
-  <div id="mobile-menu" class="mobile-menu" data-open="false">
-    <ul>
-      {items.map((item) => (
-        <li>
-          <a
-            href={localizedPath(item.path, lang)}
-            aria-current={isActive(item.path) ? 'page' : undefined}
-          >
-            {t(item.key)}
-          </a>
-        </li>
-      ))}
-    </ul>
-  </div>
 </header>
+
+<div id="mobile-menu" class="mobile-menu" data-open="false">
+  <ul>
+    {items.map((item) => (
+      <li>
+        <a
+          href={localizedPath(item.path, lang)}
+          aria-current={isActive(item.path) ? 'page' : undefined}
+        >
+          {t(item.key)}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>

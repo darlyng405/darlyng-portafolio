@@ -1,11 +1,5 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { site } from '../../data/site';
+import BeyondCodeView from '../../components/views/BeyondCodeView.astro';
 ---
 
-<BaseLayout title={`Beyond Code · ${site.name}`} locale="es">
-  <main>
-    <h1>Beyond Code</h1>
-    <!-- TODO: contenido personal real; si no existe al lanzar, activar en V1.1 (ver docs/PENDIENTES.md) -->
-  </main>
-</BaseLayout>
+<BeyondCodeView lang="es" />

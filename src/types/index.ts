@@ -24,6 +24,8 @@ export interface Project {
   slug: 'coro' | 'sia' | 'votech';
   status: ProjectStatus;
   title: string;
+  category: LocalizedText;
+  image: string;
   tagline: LocalizedText;
   description: LocalizedText;
   tech: string[];
@@ -39,6 +41,8 @@ export interface Certificate {
   expiresDate?: string;
   durationHours?: number;
   pdfPath: string;
+  thumbnail?: string;
+  credentialId?: string;
 }
 
 export interface SkillGroup {

@@ -1,0 +1,171 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../Hero.astro';
+import ProjectCard from '../ProjectCard.astro';
+import InterestCard from '../InterestCard.astro';
+import CertificateCard from '../CertificateCard.astro';
+import { projects } from '../../data/projects';
+import { certificates } from '../../data/certificates';
+import { useTranslations, localizedPath } from '../../i18n/utils';
+import type { Lang } from '../../types';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<BaseLayout
+  title={t('meta.home.title')}
+  description={t('meta.home.description')}
+>
+  <Hero />
+
+  <!-- 02 / SELECTED WORK -->
+  <section class="section container" data-reveal>
+    <div class="section-header-split">
+      <div>
+        <span class="eyebrow">{t('home.work.label')}</span>
+        <h2 class="section-title" style="margin-top: 14px;">{t('home.work.title')}</h2>
+        <p class="lead" style="margin-top: 10px;">{t('home.work.subtitle')}</p>
+      </div>
+      <a href={localizedPath('/work', lang)} class="btn">
+        <span>{t('home.work.viewAll')}</span>
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+
+    <div class="project-grid">
+      {projects.map((p, index) => (
+        <ProjectCard project={p} lang={lang} variant="compact" index={index} />
+      ))}
+    </div>
+  </section>
+
+  <!-- 03 / ABOUT SUMMARY -->
+  <section class="section container" data-reveal>
+    <div class="home-editorial-split">
+      <div class="home-editorial-main">
+        <span class="eyebrow">{t('home.about.label')}</span>
+        <h2 class="section-title" style="margin-top: 14px; max-width: 22ch; text-wrap: balance;">
+          {t('home.about.title')}
+        </h2>
+        <p class="lead" style="margin-top: 18px;">{t('home.about.body')}</p>
+        <div class="btn-row">
+          <a href={localizedPath('/about', lang)} class="btn primary">
+            <span>{t('home.about.cta')}</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="home-editorial-aside">
+        <div class="editorial-card-visual">
+          <img
+            src="/images/systems-workbench.jpg"
+            alt="Computer science fundamentals study"
+            loading="lazy"
+            width="600"
+            height="450"
+            referrerpolicy="no-referrer"
+            class="editorial-study-img"
+          />
+          <div class="editorial-card-caption">
+            <span>IPMHU · 2028</span>
+            <span>Santo Domingo, DR</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 / TECHNICAL INTERESTS -->
+  <section class="section container" data-reveal>
+    <span class="eyebrow">{t('home.interests.label')}</span>
+    <h2 class="section-title" style="margin-top: 14px;">{t('home.interests.title')}</h2>
+    <p class="lead" style="margin-top: 12px;">{t('home.interests.subtitle')}</p>
+    <InterestCard lang={lang} />
+  </section>
+
+  <!-- 05 / CERTIFICATES & CREDENTIALS -->
+  {certificates.length > 0 && (
+    <section class="section container" data-reveal>
+      <div class="section-header-split">
+        <div>
+          <span class="eyebrow">{t('home.certificates.label')}</span>
+          <h2 class="section-title" style="margin-top: 14px;">{t('home.certificates.title')}</h2>
+          <p class="lead" style="margin-top: 10px;">{t('home.certificates.subtitle')}</p>
+        </div>
+        <a href={localizedPath('/certificates', lang)} class="btn">
+          <span>{t('home.certificates.cta')}</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+
+      <div class="cert-grid">
+        {certificates.map((c) => (
+          <CertificateCard certificate={c} lang={lang} />
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- 06 / JOURNAL & 07 / BEYOND CODE DUAL EDITORIAL ROW -->
+  <section class="section container" data-reveal>
+    <div class="dual-feature-grid">
+      <article class="feature-panel">
+        <div class="feature-panel-top">
+          <span class="eyebrow">{t('home.journal.label')}</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true" class="panel-icon">
+            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
+          </svg>
+        </div>
+        <h2 class="project-title" style="margin-top: 14px;">{t('home.journal.title')}</h2>
+        <p class="lead" style="margin-top: 12px; font-size: 15px;">{t('home.journal.body')}</p>
+        <div style="margin-top: auto; padding-top: 24px;">
+          <a href={localizedPath('/journal', lang)} class="btn">
+            <span>{t('home.journal.cta')}</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </article>
+
+      <article class="feature-panel">
+        <div class="feature-panel-top">
+          <span class="eyebrow">{t('home.beyond.label')}</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true" class="panel-icon">
+            <circle cx="12" cy="12" r="10" />
+            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+          </svg>
+        </div>
+        <h2 class="project-title" style="margin-top: 14px;">{t('home.beyond.title')}</h2>
+        <p class="lead" style="margin-top: 12px; font-size: 15px;">{t('home.beyond.body')}</p>
+        <div style="margin-top: auto; padding-top: 24px;">
+          <a href={localizedPath('/beyond-code', lang)} class="btn">
+            <span>{t('home.beyond.cta')}</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 08 / CONTACT CTA -->
+  <section class="section container" data-reveal>
+    <div class="contact-banner">
+      <div>
+        <span class="eyebrow">{t('home.contact.label')}</span>
+        <h2 class="section-title" style="margin-top: 12px;">{t('home.contact.title')}</h2>
+        <p class="lead" style="margin-top: 12px;">{t('home.contact.body')}</p>
+      </div>
+      <div class="contact-banner-actions">
+        <a href={localizedPath('/contact', lang)} class="btn primary">
+          <span>{t('home.contact.cta')}</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

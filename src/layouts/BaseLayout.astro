@@ -14,6 +14,7 @@ import { site } from '../data/site';
 interface Props {
   title: string;
   description: string;
+  locale?: string;
 }
 
 const { title, description } = Astro.props;
@@ -22,6 +23,25 @@ const altPath = alternatePath(Astro.url.pathname);
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const enHref = new URL(lang === 'en' ? Astro.url.pathname : altPath, Astro.site);
 const esHref = new URL(lang === 'es' ? Astro.url.pathname : altPath, Astro.site);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  jobTitle: site.title,
+  url: Astro.site?.toString() ?? 'https://darlyng.dev',
+  email: `mailto:${site.email}`,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Santo Domingo',
+    addressCountry: 'DO',
+  },
+  alumniOf: {
+    '@type': 'EducationalOrganization',
+    name: site.education.institution,
+  },
+  sameAs: [site.github, site.linkedin],
+};
 ---
 
 <!doctype html>
@@ -43,16 +63,22 @@ const esHref = new URL(lang === 'es' ? Astro.url.pathname : altPath, Astro.site)
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content={site.name} />
-    <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'es_ES'} />
-    <meta property="og:locale:alternate" content={lang === 'en' ? 'es_ES' : 'en_US'} />
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:image" content={new URL('/images/coro-blueprint.jpg', Astro.site)} />
+    <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'es_DO'} />
+    <meta property="og:locale:alternate" content={lang === 'en' ? 'es_DO' : 'en_US'} />
 
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL('/images/coro-blueprint.jpg', Astro.site)} />
+
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)}></script>
     <script is:inline set:html={themeInit}></script>
   </head>
   <body>
     <div class="page-shell">
       <Nav />
-      <main>
+      <main id="main-content" class="page-transition">
         <slot />
       </main>
       <Footer />
@@ -60,13 +86,13 @@ const esHref = new URL(lang === 'es' ? Astro.url.pathname : altPath, Astro.site)
 
     <script>
       import { redirectForLangPreference } from '../scripts/lang-redirect';
-      import { initAnimations } from '../scripts/animations'; 
+      import { initAnimations } from '../scripts/animations';
       import '../scripts/theme-toggle';
       import '../scripts/lang-switch';
       import '../scripts/mobile-menu';
-      
+
       redirectForLangPreference();
-      initAnimations(); 
+      initAnimations();
     </script>
 
     <Analytics />
