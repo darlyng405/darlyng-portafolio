@@ -100,6 +100,12 @@ const modalId = `cert-modal-${certificate.id}`;
           <dd>{formatDate(certificate.expiresDate, lang)}</dd>
         </div>
       )}
+      {certificate.score && (
+        <div>
+          <dt>{t('certificates.score')}</dt>
+          <dd>{certificate.score}</dd>
+        </div>
+      )}
       {certificate.durationHours && (
         <div>
           <dt>{t('certificates.duration')}</dt>
@@ -118,6 +124,17 @@ const modalId = `cert-modal-${certificate.id}`;
         <span>{t('certificates.view')}</span>
         <span aria-hidden="true">↗</span>
       </a>
+      {certificate.verificationUrl && (
+        <a
+          href={certificate.verificationUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn"
+        >
+          <span>{t('certificates.verifyOnline')}</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      )}
       <button
         type="button"
         class="btn"
@@ -180,6 +197,17 @@ const modalId = `cert-modal-${certificate.id}`;
       >
         <span>{t('certificates.download')}</span>
       </a>
+      {certificate.verificationUrl && (
+        <a
+          href={certificate.verificationUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn"
+        >
+          <span>{t('certificates.verifyOnline')}</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      )}
       <button type="button" class="btn" data-modal-close>
         <span>{t('work.modal.close')}</span>
       </button>

@@ -53,7 +53,8 @@ test('projects data contains CORO, SIA, and Votech with complete bilingual secti
 });
 
 test('certificates data and skills groups match specification', () => {
-  assert.equal(certificates.length, 2);
+  assert.equal(certificates.length, 3);
+  assert.ok(certificates.some((c) => c.id === 'efset-english-b1-intermediate'));
   assert.ok(formatDate('2026-10-28', 'en').includes('2026'));
   assert.ok(formatDate('2026-10-28', 'es').includes('2026'));
 

@@ -3,27 +3,54 @@ import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const defaultCode = `#include <bits/stdc++.h>
+using namespace std;
+
+int main () {
+    cout << "Clean code over fast code" << "\\n";
+    return 0;
+}`;
 ---
 
 <div class="code-card" data-code-card>
   <div class="code-card-header">
-    <div class="code-window-dots" aria-hidden="true">
-      <span class="dot dot-1"></span>
-      <span class="dot dot-2"></span>
-      <span class="dot dot-3"></span>
+    <div class="code-header-left">
+      <div class="code-window-dots" aria-hidden="true">
+        <span class="dot dot-1"></span>
+        <span class="dot dot-2"></span>
+        <span class="dot dot-3"></span>
+      </div>
+      <span class="code-filename">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+        {t('hero.code.file')}
+      </span>
+      <span class="code-badge-editable" title={t('hero.code.editableBadge')}>{lang === 'es' ? 'Editable' : 'Editable'}</span>
     </div>
-    <span class="code-filename">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <polyline points="16 18 22 12 16 6"></polyline>
-        <polyline points="8 6 2 12 8 18"></polyline>
-      </svg>
-      {t('hero.code.file')}
-    </span>
+
     <div class="code-header-right">
       <span class="code-lang-tag">{t('hero.code.lang')}</span>
+
       <button
         type="button"
-        class="code-run-btn"
+        class="code-header-btn code-btn-reset"
+        data-code-reset
+        title={t('hero.code.reset')}
+        aria-label={t('hero.code.reset')}
+      >
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+          <path d="M3 3v5h5"></path>
+        </svg>
+        <span>{lang === 'es' ? 'Revertir' : 'Reset'}</span>
+      </button>
+
+      <button
+        type="button"
+        class="code-header-btn code-run-btn"
         data-code-run
         aria-expanded="false"
         aria-controls="hero-code-stdout"
@@ -32,44 +59,293 @@ const t = useTranslations(lang);
         <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <polygon points="5 3 19 12 5 21 5 3"></polygon>
         </svg>
-        <span>RUN</span>
+        <span>{lang === 'es' ? 'RUN' : 'RUN'}</span>
       </button>
     </div>
   </div>
 
-  <div class="code-card-body" role="region" aria-label="C++17 code sample">
-    <pre style="margin:0;"><code class="typewriter-code"><span class="code-line"><span class="ln">01</span><span class="tok-pre">#include</span> <span class="tok-str">&lt;bits/stdc++.h&gt;</span></span>
-<span class="code-line"><span class="ln">02</span><span class="tok-kw">using namespace</span> <span class="tok-fn">std</span>;</span>
-<span class="code-line"><span class="ln">03</span></span>
-<span class="code-line"><span class="ln">04</span><span class="tok-kw">int</span> <span class="tok-fn">main</span> () &#123;</span>
-<span class="code-line"><span class="ln">05</span>    cout &lt;&lt; <span class="tok-str">"Clean code over fast code"</span> &lt;&lt; <span class="tok-str">"\n"</span>;</span>
-<span class="code-line"><span class="ln">06</span>    <span class="tok-kw">return</span> <span class="tok-num">0</span>;</span>
-<span class="code-line"><span class="ln">07</span>&#125;</span></code></pre>
+  <div class="code-card-body" role="region" aria-label="C++17 code editor">
+    <!-- Live, directly editable monospace code block with dynamic line numbers -->
+    <div class="code-edit-container">
+      <div class="code-line-numbers" data-code-lines aria-hidden="true">
+        <span>01</span><span>02</span><span>03</span><span>04</span><span>05</span><span>06</span><span>07</span>
+      </div>
+      <textarea
+        class="code-textarea"
+        data-code-input
+        spellcheck="false"
+        autocomplete="off"
+        autocapitalize="off"
+        rows="7"
+        aria-label="C++ editable code"
+      >{defaultCode}</textarea>
+    </div>
   </div>
 
   <div id="hero-code-stdout" class="code-stdout" data-open="false" aria-live="polite">
     <div class="code-stdout-bar">
-      <span>$ g++ -std=c++17 competitive.cpp &amp;&amp; ./a.out</span>
-      <span class="code-exit-ok">exit 0</span>
+      <span>$ g++ -std=c++17 main.cpp &amp;&amp; ./a.out</span>
+      <span class="code-exit-badge code-exit-ok" data-exit-badge>exit 0</span>
     </div>
-    <div class="code-stdout-output">Clean code over fast code</div>
+    <div class="code-stdout-output" data-stdout-output>Clean code over fast code</div>
   </div>
 
   <div class="code-card-footer">
-    <span><span class="code-indicator" aria-hidden="true"></span>{t('hero.code.statusLeft')}</span>
-    <span>{t('hero.code.statusRight')}</span>
+    <div class="code-footer-left">
+      <span>
+        <span class="code-indicator" data-code-indicator aria-hidden="true"></span>
+        <span data-code-status-label>{t('hero.code.statusLeft')}</span>
+      </span>
+    </div>
+    <div class="code-footer-right">
+      <span class="code-footer-hint">{t('hero.code.runHint')}</span>
+      <span class="code-storage-badge" title={t('hero.code.deviceMemory')}>
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+          <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+          <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+        </svg>
+        <span>{t('hero.code.deviceMemory')}</span>
+      </span>
+    </div>
   </div>
 </div>
 
-<script>
-  document.querySelectorAll<HTMLButtonElement>('[data-code-run]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const card = btn.closest('[data-code-card]');
-      const stdout = card?.querySelector<HTMLElement>('.code-stdout');
-      if (!stdout) return;
-      const isOpen = stdout.getAttribute('data-open') === 'true';
-      stdout.setAttribute('data-open', String(!isOpen));
-      btn.setAttribute('aria-expanded', String(!isOpen));
-    });
-  });
+<script is:inline define:vars={{ defaultCode, lang }}>
+  (function () {
+    const STORAGE_KEY = 'darlyng_cpp_snippet';
+
+    const card = document.querySelector('[data-code-card]');
+    if (!card) return;
+
+    const textarea = card.querySelector('[data-code-input]');
+    const linesGutter = card.querySelector('[data-code-lines]');
+    const resetBtn = card.querySelector('[data-code-reset]');
+    const runBtn = card.querySelector('[data-code-run]');
+    const stdout = card.querySelector('.code-stdout');
+    const stdoutOutput = card.querySelector('[data-stdout-output]');
+    const exitBadge = card.querySelector('[data-exit-badge]');
+    const indicator = card.querySelector('[data-code-indicator]');
+    const statusLabel = card.querySelector('[data-code-status-label]');
+
+    const labelOriginal = lang === 'es' ? 'CURIOSO POR DEFECTO' : 'CURIOUS BY DEFAULT';
+    const labelModified = lang === 'es' ? 'EDITADO LOCALMENTE' : 'EDITED LOCALLY';
+
+    function updateLineNumbers(code) {
+      if (!linesGutter) return;
+      const count = Math.max(1, code.split('\n').length);
+      let html = '';
+      for (let i = 1; i <= count; i++) {
+        html += `<span>${String(i).padStart(2, '0')}</span>`;
+      }
+      linesGutter.innerHTML = html;
+    }
+
+    function updateCardState(code) {
+      const isModified = code.trim() !== defaultCode.trim();
+
+      updateLineNumbers(code);
+
+      if (indicator) {
+        indicator.setAttribute('data-modified', String(isModified));
+      }
+      if (statusLabel) {
+        statusLabel.textContent = isModified ? labelModified : labelOriginal;
+      }
+
+      if (textarea && textarea.value !== code) {
+        textarea.value = code;
+      }
+
+      if (textarea) {
+        const lineCount = code.split('\n').length;
+        textarea.rows = Math.max(7, Math.min(24, lineCount));
+      }
+    }
+
+    function simulateCpp(code) {
+      // 1. Check for main function
+      if (!/\bint\s+main\s*\([^)]*\)/.test(code) && !/\bmain\s*\([^)]*\)/.test(code)) {
+        return {
+          exitCode: 1,
+          output:
+            "/usr/bin/ld: /usr/lib/crt1.o: in function `_start':\n(.text+0x20): undefined reference to `main'\ncollect2: error: ld returned 1 exit status",
+        };
+      }
+
+      // 2. Check for unbalanced double quotes
+      let inString = false;
+      for (let i = 0; i < code.length; i++) {
+        if (code[i] === '"' && (i === 0 || code[i - 1] !== '\\')) {
+          inString = !inString;
+        }
+      }
+      if (inString) {
+        return {
+          exitCode: 1,
+          output: 'main.cpp: error: missing terminating " character',
+        };
+      }
+
+      // 3. Parse cout streams
+      const coutRegex = /cout\s*<<\s*([^;]+);/g;
+      let match;
+      let stdoutText = '';
+      let foundCout = false;
+
+      while ((match = coutRegex.exec(code)) !== null) {
+        foundCout = true;
+        const stream = match[1];
+        const parts = stream.split('<<').map((p) => p.trim());
+        for (const part of parts) {
+          if (!part) continue;
+          if (part === 'endl') {
+            stdoutText += '\n';
+          } else if (part.startsWith('"') && part.endsWith('"')) {
+            const raw = part.slice(1, -1);
+            stdoutText += raw
+              .replace(/\\n/g, '\n')
+              .replace(/\\t/g, '\t')
+              .replace(/\\"/g, '"');
+          } else if (!isNaN(Number(part))) {
+            stdoutText += part;
+          } else {
+            stdoutText += part.replace(/["']/g, '');
+          }
+        }
+      }
+
+      if (!foundCout) {
+        stdoutText = '[Process completed with exit code 0 — no stdout generated]';
+      }
+
+      return {
+        exitCode: 0,
+        output: stdoutText.trimEnd() || '\n',
+      };
+    }
+
+    function runCode() {
+      const code = textarea ? textarea.value : defaultCode;
+      const res = simulateCpp(code);
+
+      if (exitBadge) {
+        exitBadge.textContent = `exit ${res.exitCode}`;
+        exitBadge.className = `code-exit-badge ${res.exitCode === 0 ? 'code-exit-ok' : 'code-exit-err'}`;
+      }
+
+      if (stdoutOutput) {
+        stdoutOutput.textContent = res.output;
+      }
+
+      if (stdout) {
+        stdout.setAttribute('data-open', 'true');
+      }
+
+      if (runBtn) {
+        runBtn.setAttribute('aria-expanded', 'true');
+      }
+    }
+
+    // Load initial code from device storage (localStorage)
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved && typeof saved === 'string') {
+        updateCardState(saved);
+      } else {
+        updateCardState(defaultCode);
+      }
+    } catch {
+      updateCardState(defaultCode);
+    }
+
+    // Event: Reset button restores default code & removes from localStorage
+    if (resetBtn) {
+      resetBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        try {
+          localStorage.removeItem(STORAGE_KEY);
+        } catch {
+          // Ignore localStorage errors
+        }
+        updateCardState(defaultCode);
+      });
+    }
+
+    // Event: Run button executes simulation
+    if (runBtn) {
+      runBtn.addEventListener('click', () => {
+        runCode();
+      });
+    }
+
+    // Event: Typing in textarea directly saves to localStorage and updates line numbers
+    if (textarea) {
+      textarea.addEventListener('input', () => {
+        const val = textarea.value;
+        try {
+          localStorage.setItem(STORAGE_KEY, val);
+        } catch {
+          // Ignore localStorage quota errors
+        }
+        updateCardState(val);
+      });
+
+      // Keyboard shortcuts: Tab indentation, Auto-indent on Enter, Ctrl+Enter to Run
+      textarea.addEventListener('keydown', (e) => {
+        // Ctrl+Enter or Cmd+Enter -> RUN
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+          e.preventDefault();
+          runCode();
+          return;
+        }
+
+        // Tab -> Insert 4 spaces without losing focus
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = textarea.selectionStart;
+          const end = textarea.selectionEnd;
+          const val = textarea.value;
+
+          textarea.value = val.substring(0, start) + '    ' + val.substring(end);
+          textarea.selectionStart = textarea.selectionEnd = start + 4;
+
+          try {
+            localStorage.setItem(STORAGE_KEY, textarea.value);
+          } catch {
+            // Ignore localStorage quota errors
+          }
+          updateCardState(textarea.value);
+          return;
+        }
+
+        // Enter -> Auto-indent with matching indentation of current line
+        if (e.key === 'Enter') {
+          const start = textarea.selectionStart;
+          const val = textarea.value;
+          const lineStart = val.lastIndexOf('\n', start - 1) + 1;
+          const currentLine = val.substring(lineStart, start);
+          const indentMatch = currentLine.match(/^(\s+)/);
+          const indent = indentMatch ? indentMatch[1] : '';
+
+          // If line ends with opening brace '{', add 4 extra spaces
+          const extraIndent = currentLine.trim().endsWith('{') ? '    ' : '';
+
+          if (indent || extraIndent) {
+            e.preventDefault();
+            const insertion = '\n' + indent + extraIndent;
+            textarea.value = val.substring(0, start) + insertion + val.substring(textarea.selectionEnd);
+            textarea.selectionStart = textarea.selectionEnd = start + insertion.length;
+
+            try {
+              localStorage.setItem(STORAGE_KEY, textarea.value);
+            } catch {
+              // Ignore localStorage quota errors
+            }
+            updateCardState(textarea.value);
+          }
+        }
+      });
+    }
+  })();
 </script>

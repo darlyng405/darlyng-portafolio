@@ -43,6 +43,8 @@ export interface Certificate {
   pdfPath: string;
   thumbnail?: string;
   credentialId?: string;
+  verificationUrl?: string;
+  score?: string;
 }
 
 export interface SkillGroup {

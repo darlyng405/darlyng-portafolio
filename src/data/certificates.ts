@@ -35,6 +35,24 @@ export const certificates: Certificate[] = [
     thumbnail: '/images/certificates/talento-digital-thumb.png',
     credentialId: 'INDOTEL-BID-2026-80H',
   },
+  {
+    id: 'efset-english-b1-intermediate',
+    name: {
+      en: 'EF SET English Certificate — B1 Intermediate (42/100)',
+      es: 'Certificación de Inglés EF SET — B1 Intermedio (42/100)',
+    },
+    issuer: {
+      en: 'EF Standard English Test (EF SET)',
+      es: 'EF Standard English Test (EF SET)',
+    },
+    issuerShort: 'EF SET',
+    issuedDate: '2026-11-09',
+    pdfPath: '/certificates/efset-b1-intermediate.pdf',
+    thumbnail: '/images/certificates/efset-b1-thumb.png',
+    credentialId: 'XKk5dd',
+    verificationUrl: 'https://cert.efset.org/es/XKk5dd',
+    score: '42/100 · B1 Intermediate',
+  },
 ];
 
 export function formatDate(iso: string, lang: 'en' | 'es'): string {
