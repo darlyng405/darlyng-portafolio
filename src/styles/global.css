@@ -371,12 +371,24 @@ h4 {
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--font-heading);
   font-size: 16px;
   font-weight: 700;
   letter-spacing: -0.05em;
   white-space: nowrap;
   flex-shrink: 0;
+}
+
+.nav-logo-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  object-fit: contain;
+  flex-shrink: 0;
+  display: block;
 }
 
 .logo span {
