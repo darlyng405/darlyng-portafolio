@@ -35,7 +35,7 @@ function themeInitPlugin() {
 }
 
 export default defineConfig({
-  site: 'https://darlyng.dev',
+  site: process.env.APP_URL || 'https://darlyng.dev',
   output: 'static',
   devToolbar: {
     enabled: false,
