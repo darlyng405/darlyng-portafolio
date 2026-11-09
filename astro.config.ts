@@ -34,8 +34,26 @@ function themeInitPlugin() {
   };
 }
 
+function resolveSiteUrl(): string {
+  const envUrl = process.env.PUBLIC_SITE_URL || process.env.SITE_URL;
+  if (envUrl) {
+    return envUrl.startsWith('http') ? envUrl : `https://${envUrl}`;
+  }
+
+  const vercelDomain = process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL;
+  if (vercelDomain) {
+    return `https://${vercelDomain}`;
+  }
+
+  if (process.env.APP_URL) {
+    return process.env.APP_URL;
+  }
+
+  return 'https://darlyng-portfolio.vercel.app';
+}
+
 export default defineConfig({
-  site: process.env.APP_URL || 'https://darlyng.dev',
+  site: resolveSiteUrl(),
   output: 'static',
   devToolbar: {
     enabled: false,

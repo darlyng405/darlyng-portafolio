@@ -21,15 +21,13 @@ const { title, description } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const altPath = alternatePath(Astro.url.pathname);
 
-// Dynamically resolve base origin for live environments (Cloud Run, custom domain, or dev)
-const reqHost = Astro.request?.headers?.get('x-forwarded-host') || Astro.request?.headers?.get('host');
-const reqProto = Astro.request?.headers?.get('x-forwarded-proto') || 'https';
-const reqOrigin = reqHost && !reqHost.includes('localhost') && !reqHost.includes('127.0.0.1')
-  ? `${reqProto}://${reqHost}`
-  : undefined;
+// Resolve base URL for Vercel, Cloud Run, or custom domains:
+const vercelHost = process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL;
+const defaultHost = vercelHost
+  ? `https://${vercelHost}`
+  : process.env.APP_URL || (Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://darlyng-portfolio.vercel.app');
 
-const baseOrigin = reqOrigin || process.env.APP_URL || Astro.site?.toString().replace(/\/$/, '') || 'https://darlyng.dev';
-const siteUrl = new URL(baseOrigin);
+const siteUrl = new URL(defaultHost);
 
 const canonical = new URL(Astro.url.pathname, siteUrl);
 const enHref = new URL(lang === 'en' ? Astro.url.pathname : altPath, siteUrl);
